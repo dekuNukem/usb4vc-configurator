@@ -1,0 +1,42 @@
+{
+    "display_name": "Mouse & KB",
+    "device_type": "protocol_list_gamepad",
+    "protocol_board": "ADB",
+    "protocol_name": "OFF",
+    "mapping": {
+        "BTN_SOUTH": {
+            "code": "BTN_LEFT"
+        },
+        "BTN_TL": {
+            "code": "BTN_LEFT"
+        },
+        "ABS_X": {
+            "code": "KEY_RIGHT",
+            "code_neg": "KEY_LEFT"
+        },
+        "ABS_Y": {
+            "code": "KEY_DOWN",
+            "code_neg": "KEY_UP"
+        },
+        "ABS_HAT0X": {
+            "code": "KEY_RIGHT",
+            "code_neg": "KEY_LEFT"
+        },
+        "ABS_HAT0Y": {
+            "code": "KEY_DOWN",
+            "code_neg": "KEY_UP"
+        },
+        "ABS_Z": {
+            "code": "REL_X"
+        },
+        "ABS_RZ": {
+            "code": "REL_Y"
+        },
+        "ABS_RX": {
+            "code": "REL_X"
+        },
+        "ABS_RY": {
+            "code": "REL_Y"
+        }
+    }
+}
