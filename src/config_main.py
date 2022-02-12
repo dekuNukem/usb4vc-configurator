@@ -65,6 +65,17 @@ def backup_button_click():
     else:
         webbrowser.open(backup_path)
 
+invalid_filename_characters = ['<', '>', ':', '"', '/', '\\', '|', '?', '*']
+def clean_input(str_input, len_limit=None, clean_filename=False):
+    result = ''.join([x for x in str_input if 32 <= ord(x) <= 126 and x not in invalid_filename_characters])
+    if clean_filename is False:
+        result = ''.join([x for x in str_input if 32 <= ord(x) <= 126])
+    while('  ' in result):
+        result = result.replace('  ', ' ')
+    if len_limit is not None:
+        result = result[:len_limit]
+    return result.strip()
+
 INVALID_ROOT_FOLDER_STRING = "<-- Press & Select Your Flash Drive"
 dp_root_folder_display = StringVar()
 dp_root_folder_display.set(INVALID_ROOT_FOLDER_STRING)
@@ -264,7 +275,7 @@ ibm_15pin_code_dict = {
 def creat_mapping_window(existing_rule=None):
     rule_window = Toplevel(root)
     rule_window.title("Edit rules")
-    rule_window.geometry("400x180")
+    rule_window.geometry("400x210")
     rule_window.resizable(width=FALSE, height=FALSE)
     rule_window.grab_set()
 
@@ -302,21 +313,81 @@ def creat_mapping_window(existing_rule=None):
     map_save_button = Button(rule_window, text="Save This Mapping", command=None, fg='red')
     map_save_button.place(x=10, y=140, width=380, height=25)
 
-creat_mapping_window()
+    def close_map_window():
+        rule_window.destroy()
+
+    map_cancel_button = Button(rule_window, text="Cancel", command=close_map_window)
+    map_cancel_button.place(x=10, y=175, width=380, height=25)
+
+def profile_add_click():
+    answer = simpledialog.askstring("Input", "New profile name?", parent=profiles_lf)
+    if answer is None:
+        return
+    answer = clean_input(answer, len_limit=20)
+    if len(answer) == 0:
+        return
+    this_mapping = {'display_name': answer, 'device_type': 'protocol_list_gamepad', 'gamepad_type':'Generic', 'protocol_board': 'Unknown', 'protocol_name': 'OFF', 'mapping': {}}
+    gamepad_mapping_dict_list.append(this_mapping)
+    update_profile_display()
+
+def profile_remove_click():
+    selection = profile_lstbox.curselection()
+    if len(selection) <= 0:
+        return
+    gamepad_mapping_dict_list.pop(selection[0])
+    update_profile_display()
+    profile_lstbox.selection_clear(0, len(gamepad_mapping_dict_list))
+    profile_lstbox.selection_set(selection[0])
+    if len(gamepad_mapping_dict_list) <= 0 or len(profile_lstbox.curselection()) <= 0:
+        mapping_add_button.config(state=DISABLED)
+        mapping_edit_button.config(state=DISABLED)
+        mapping_dupe_button.config(state=DISABLED)
+        mapping_remove_button.config(state=DISABLED)
+        mapping_save_button.config(state=DISABLED)
+        pboard_dropdown.config(state=DISABLED)
+        usb_gamepad_dropdown.config(state=DISABLED)
+    update_profile_display()
+
+def profile_rename_click():
+    selection = profile_lstbox.curselection()
+    if len(selection) <= 0:
+        return
+    answer = simpledialog.askstring("Input", "New name?", parent=profiles_lf, initialvalue=gamepad_mapping_dict_list[selection[0]].get('display_name', 'None'))
+    if answer is None:
+        return
+    answer = clean_input(answer, len_limit=20)
+    if len(answer) == 0:
+        return
+    gamepad_mapping_dict_list[selection[0]]['display_name'] = answer
+    update_profile_display()
+
+def profile_dupe_click():
+    selection = profile_lstbox.curselection()
+    if len(selection) <= 0:
+        return
+    answer = simpledialog.askstring("Input", "New name?", parent=profiles_lf, initialvalue=gamepad_mapping_dict_list[selection[0]].get('display_name', 'None'))
+    if answer is None:
+        return
+    answer = clean_input(answer, len_limit=20)
+    if len(answer) == 0:
+        return
+    this_mapping = {'display_name': answer, 'device_type': 'protocol_list_gamepad', 'gamepad_type':'Generic', 'protocol_board': 'Unknown', 'protocol_name': 'OFF', 'mapping': {}}
+    gamepad_mapping_dict_list.insert(selection[0] + 1, this_mapping)
+    update_profile_display()
 
 BUTTON_WIDTH = 150
 BUTTON_HEIGHT = 25
 
-profile_add_button = Button(profiles_lf, text="New", command=None, state=DISABLED)
+profile_add_button = Button(profiles_lf, text="New", command=profile_add_click, state=DISABLED)
 profile_add_button.place(x=10, y=290, width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 
-profile_dupe_button = Button(profiles_lf, text="Duplicate", command=None, state=DISABLED)
+profile_dupe_button = Button(profiles_lf, text="Duplicate", command=profile_dupe_click, state=DISABLED)
 profile_dupe_button.place(x=10, y=320, width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 
-profile_rename_button = Button(profiles_lf, text="Rename", command=None, state=DISABLED)
+profile_rename_button = Button(profiles_lf, text="Rename", command=profile_rename_click, state=DISABLED)
 profile_rename_button.place(x=10, y=350, width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 
-profile_remove_button = Button(profiles_lf, text="Remove", command=None, state=DISABLED)
+profile_remove_button = Button(profiles_lf, text="Remove", command=profile_remove_click, state=DISABLED)
 profile_remove_button.place(x=10, y=380, width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 
 mapping_add_button = Button(mappings_lf, text="New", command=creat_mapping_window, state=DISABLED)
@@ -334,7 +405,7 @@ mapping_remove_button.place(x=200, y=380, width=BUTTON_WIDTH, height=BUTTON_HEIG
 mapping_save_button = Button(gamepad_config_lf, text="Write Current Mappings to Flash Drive", command=None, state=DISABLED, fg='red')
 mapping_save_button.place(x=10, y=447, width=755, height=BUTTON_HEIGHT)
 
-def enable_buttons():
+def enable_profile_buttons():
     copy_button.config(state=NORMAL)
     profile_add_button.config(state=NORMAL)
     profile_remove_button.config(state=NORMAL)
@@ -355,7 +426,7 @@ def select_root_folder(root_path=None):
     flash_drive_config_path = os.path.join(flash_drive_base_path, 'config')
     load_gamepad_mapping(flash_drive_config_path)
     update_profile_display()
-    enable_buttons()
+    enable_profile_buttons()
 
 open_button = Button(connection_lf, text="Open...", command=select_root_folder)
 open_button.place(x=10, y=5, width=80)
