@@ -12,6 +12,7 @@ import urllib.request
 from appdirs import *
 import json
 import shutil
+import copy
 
 THIS_VERSION_NUMBER = '0.0.1'
 MAIN_WINDOW_WIDTH = 800
@@ -194,74 +195,66 @@ mappings_lstbox = Listbox(mappings_lf, listvariable=mappings_var, height=16, exp
 mappings_lstbox.place(x=10, y=5, width=350, height=340)
 mappings_lstbox.config()
 
-generic_usb_gamepad_codes = ["BTN_GAMEPAD", "BTN_SOUTH", "BTN_A", "BTN_EAST", "BTN_B", "BTN_C", "BTN_NORTH", "BTN_X", "BTN_WEST", "BTN_Y", "BTN_Z", "BTN_TL", "BTN_TR", "BTN_TL2", "BTN_TR2", "BTN_SELECT", "BTN_START", "BTN_MODE", "BTN_THUMBL", "BTN_THUMBR", "ABS_X", "ABS_Y", "ABS_Z", "ABS_RX", "ABS_RY", "ABS_RZ", "ABS_THROTTLE", "ABS_RUDDER", "ABS_WHEEL", "ABS_GAS", "ABS_BRAKE", "ABS_HAT0X", "ABS_HAT0Y", "ABS_HAT1X", "ABS_HAT1Y", "ABS_HAT2X", "ABS_HAT2Y", "ABS_HAT3X", "ABS_HAT3Y"]
+generic_usb_gamepad_buttons = ["BTN_GAMEPAD", "BTN_SOUTH", "BTN_A", "BTN_EAST", "BTN_B", "BTN_C", "BTN_NORTH", "BTN_X", "BTN_WEST", "BTN_Y", "BTN_Z", "BTN_TL", "BTN_TR", "BTN_TL2", "BTN_TR2", "BTN_SELECT", "BTN_START", "BTN_MODE", "BTN_THUMBL", "BTN_THUMBR"]
+generic_usb_gamepad_axes = ["ABS_X", "ABS_Y", "ABS_Z", "ABS_RX", "ABS_RY", "ABS_RZ", "ABS_THROTTLE", "ABS_RUDDER", "ABS_WHEEL", "ABS_GAS", "ABS_BRAKE", "ABS_HAT0X", "ABS_HAT0Y", "ABS_HAT1X", "ABS_HAT1Y", "ABS_HAT2X", "ABS_HAT2Y", "ABS_HAT3X", "ABS_HAT3Y"]
 
-xbox1_wired_code_dict = {
-    "XB1W_A":"A Button",
-    "XB1W_B":"B Button",
-    "XB1W_X":"X Button",
-    "XB1W_Y":"Y Button",
-    "XB1W_LSX":"Left Stick X",
-    "XB1W_LSY":"Left Stick Y",
-    "XB1W_RSX":"Right Stick X",
-    "XB1W_RSY":"Right Stick Y",
-    "XB1W_LB":"LB Button",
-    "XB1W_RB":"RB Button",
-    "XB1W_LSB":"Left Stick Button",
-    "XB1W_RSB":"Right Stick Button",
-    "XB1W_LT":"Left Trigger",
-    "XB1W_RT":"Right Trigger",
-    "XB1W_DPX":"D-pad X",
-    "XB1W_DPY":"D-pad X",
-    "XB1W_VIEW":"View Button",
-    "XB1W_MENU":"Menu Button",
-    "XB1W_LOGO":"Xbox Button",
+xbox1_button_code_dict = {
+    "XB1_A":"A Button",
+    "XB1_B":"B Button",
+    "XB1_X":"X Button",
+    "XB1_Y":"Y Button",
+    "XB1_LSB":"Left Stick Button",
+    "XB1_RSB":"Right Stick Button",
+    "XB1_LB":"LB Button",
+    "XB1_RB":"RB Button",
+    "XB1_VIEW":"View Button",
+    "XB1_MENU":"Menu Button",
+    "XB1_LOGO":"Xbox Button",
 }
 
-xbox1_bluetooth_code_dict = {
-    "XB1BT_A":"A Button",
-    "XB1BT_B":"B Button",
-    "XB1BT_X":"X Button",
-    "XB1BT_Y":"Y Button",
-    "XB1BT_LSX":"Left Stick X",
-    "XB1BT_LSY":"Left Stick Y",
-    "XB1BT_RSX":"Right Stick X",
-    "XB1BT_RSY":"Right Stick Y",
-    "XB1BT_LSB":"Left Stick Button",
-    "XB1BT_RSB":"Right Stick Button",
-    "XB1BT_LB":"LB Button",
-    "XB1BT_RB":"RB Button",
-    "XB1BT_LT":"Left Trigger",
-    "XB1BT_RT":"Right Trigger",
-    "XB1BT_DPX":"D-pad X",
-    "XB1BT_DPY":"D-pad Y",
-    "XB1BT_VIEW":"View Button",
-    "XB1BT_MENU":"Menu Button",
-    "XB1BT_LOGO":"Xbox Button",
+xbox1_axes_code_dict = {
+    "XB1_LSX":"Left Stick X",
+    "XB1_LSY":"Left Stick Y",
+    "XB1_RSX":"Right Stick X",
+    "XB1_RSY":"Right Stick Y",
+    "XB1_LT":"Left Trigger",
+    "XB1_RT":"Right Trigger",
+    "XB1_DPX":"D-pad X",
+    "XB1_DPY":"D-pad Y",
 }
 
 kb_code_list = [ "KEY_1", "KEY_2", "KEY_3", "KEY_4", "KEY_5", "KEY_6", "KEY_7", "KEY_8", "KEY_9", "KEY_0", "KEY_A", "KEY_B", "KEY_C", "KEY_D", "KEY_E", "KEY_F", "KEY_G", "KEY_H", "KEY_I", "KEY_J", "KEY_K", "KEY_L", "KEY_M", "KEY_N", "KEY_O", "KEY_P", "KEY_Q", "KEY_R", "KEY_S", "KEY_T", "KEY_U", "KEY_V", "KEY_W", "KEY_X", "KEY_Y", "KEY_Z", "KEY_SPACE", "KEY_UP", "KEY_DOWN", "KEY_LEFT", "KEY_RIGHT", "KEY_ESC", "KEY_TAB", "KEY_ENTER", "KEY_END", "KEY_HOME", "KEY_LEFTALT", "KEY_LEFTCTRL", "KEY_LEFTSHIFT", "KEY_RIGHTALT", "KEY_RIGHTCTRL", "KEY_RIGHTSHIFT", "KEY_SCROLLLOCK", "KEY_SYSRQ", "KEY_PAGEUP", "KEY_PAGEDOWN", "KEY_INSERT", "KEY_DELETE", "KEY_102ND", "KEY_CAPSLOCK", "KEY_NUMLOCK", "KEY_MINUS", "KEY_EQUAL", "KEY_BACKSPACE", "KEY_LEFTBRACE", "KEY_RIGHTBRACE", "KEY_SEMICOLON", "KEY_APOSTROPHE", "KEY_GRAVE", "KEY_BACKSLASH", "KEY_COMMA", "KEY_DOT", "KEY_SLASH", "KEY_F1", "KEY_F2", "KEY_F3", "KEY_F4", "KEY_F5", "KEY_F6", "KEY_F7", "KEY_F8", "KEY_F9", "KEY_F10", "KEY_F11", "KEY_F12", "KEY_F13", "KEY_F14", "KEY_F15", "KEY_F16", "KEY_F17", "KEY_F18", "KEY_F19", "KEY_F20", "KEY_F21", "KEY_F22", "KEY_F23", "KEY_F24", "KEY_KP0", "KEY_KP1", "KEY_KP2", "KEY_KP3", "KEY_KP4", "KEY_KP5", "KEY_KP6", "KEY_KP7", "KEY_KP8", "KEY_KP9", "KEY_KPASTERISK", "KEY_KPDOT", "KEY_KPENTER", "KEY_KPMINUS", "KEY_KPPLUS", "KEY_KPSLASH"]
-# kb_code_unused = ["KEY_ZENKAKUHANKAKU", "KEY_RO", "KEY_KATAKANA", "KEY_HIRAGANA", "KEY_HENKAN", "KEY_KATAKANAHIRAGANA", "KEY_MUHENKAN", "KEY_MACRO", "KEY_MUTE", "KEY_VOLUMEDOWN", "KEY_VOLUMEUP", "KEY_POWER", "KEY_LINEFEED", "KEY_KPCOMMA", "KEY_KPEQUAL", "KEY_KPJPCOMMA", "KEY_KPLEFTPAREN", "KEY_KPRIGHTPAREN", "KEY_KPPLUSMINUS", "KEY_PAUSE", "KEY_SCALE", "KEY_HANGEUL", "KEY_HANGUEL", "KEY_HANJA", "KEY_YEN", "KEY_LEFTMETA", "KEY_RIGHTMETA", "KEY_COMPOSE", "KEY_STOP", "KEY_AGAIN", "KEY_PROPS", "KEY_UNDO", "KEY_FRONT", "KEY_COPY", "KEY_OPEN", "KEY_PASTE", "KEY_FIND", "KEY_CUT", "KEY_HELP", "KEY_MENU", "KEY_CALC", "KEY_SETUP", "KEY_SLEEP", "KEY_WAKEUP", "KEY_FILE", "KEY_SENDFILE", "KEY_DELETEFILE", "KEY_XFER", "KEY_PROG1", "KEY_PROG2", "KEY_WWW", "KEY_MSDOS", "KEY_COFFEE", "KEY_SCREENLOCK", "KEY_ROTATE_DISPLAY", "KEY_DIRECTION", "KEY_CYCLEWINDOWS", "KEY_MAIL", "KEY_BOOKMARKS", "KEY_COMPUTER", "KEY_BACK", "KEY_FORWARD", "KEY_CLOSECD", "KEY_EJECTCD", "KEY_EJECTCLOSECD", "KEY_NEXTSONG", "KEY_PLAYPAUSE", "KEY_PREVIOUSSONG", "KEY_STOPCD", "KEY_RECORD", "KEY_REWIND", "KEY_PHONE", "KEY_ISO", "KEY_CONFIG", "KEY_HOMEPAGE", "KEY_REFRESH", "KEY_EXIT", "KEY_MOVE", "KEY_EDIT", "KEY_SCROLLUP", "KEY_SCROLLDOWN", "KEY_NEW", "KEY_REDO"]
-mouse_code_dict = {
+kb_code_unused = ["KEY_ZENKAKUHANKAKU", "KEY_RO", "KEY_KATAKANA", "KEY_HIRAGANA", "KEY_HENKAN", "KEY_KATAKANAHIRAGANA", "KEY_MUHENKAN", "KEY_MACRO", "KEY_MUTE", "KEY_VOLUMEDOWN", "KEY_VOLUMEUP", "KEY_POWER", "KEY_LINEFEED", "KEY_KPCOMMA", "KEY_KPEQUAL", "KEY_KPJPCOMMA", "KEY_KPLEFTPAREN", "KEY_KPRIGHTPAREN", "KEY_KPPLUSMINUS", "KEY_PAUSE", "KEY_SCALE", "KEY_HANGEUL", "KEY_HANGUEL", "KEY_HANJA", "KEY_YEN", "KEY_LEFTMETA", "KEY_RIGHTMETA", "KEY_COMPOSE", "KEY_STOP", "KEY_AGAIN", "KEY_PROPS", "KEY_UNDO", "KEY_FRONT", "KEY_COPY", "KEY_OPEN", "KEY_PASTE", "KEY_FIND", "KEY_CUT", "KEY_HELP", "KEY_MENU", "KEY_CALC", "KEY_SETUP", "KEY_SLEEP", "KEY_WAKEUP", "KEY_FILE", "KEY_SENDFILE", "KEY_DELETEFILE", "KEY_XFER", "KEY_PROG1", "KEY_PROG2", "KEY_WWW", "KEY_MSDOS", "KEY_COFFEE", "KEY_SCREENLOCK", "KEY_ROTATE_DISPLAY", "KEY_DIRECTION", "KEY_CYCLEWINDOWS", "KEY_MAIL", "KEY_BOOKMARKS", "KEY_COMPUTER", "KEY_BACK", "KEY_FORWARD", "KEY_CLOSECD", "KEY_EJECTCD", "KEY_EJECTCLOSECD", "KEY_NEXTSONG", "KEY_PLAYPAUSE", "KEY_PREVIOUSSONG", "KEY_STOPCD", "KEY_RECORD", "KEY_REWIND", "KEY_PHONE", "KEY_ISO", "KEY_CONFIG", "KEY_HOMEPAGE", "KEY_REFRESH", "KEY_EXIT", "KEY_MOVE", "KEY_EDIT", "KEY_SCROLLUP", "KEY_SCROLLDOWN", "KEY_NEW", "KEY_REDO"]
+
+mouse_button_code_dict = {
     "BTN_LEFT":"Left Button",
     "BTN_RIGHT":"Right Button",
     "BTN_MIDDLE":"Middle Button",
     "BTN_SIDE":"Side Button",
     "BTN_EXTRA":"Extra Button",
+}
+
+mouse_axes_code_dict = {
     "REL_X":"Mouse X",
     "REL_Y":"Mouse Y",
     "REL_Z":"Vertical Scroll",
 }
 
-ibm_15pin_code_dict = {
+ibm_15pin_button_code_dict = {
     'IBM_GGP_BTN_1':'Button 1',
     'IBM_GGP_BTN_2':'Button 2',
     'IBM_GGP_BTN_3':'Button 3',
     'IBM_GGP_BTN_4':'Button 4',
+}
+
+ibm_15pin_half_axes_code_dict = {
     'IBM_GGP_JS1_X':'Joystick 1 X Axis',
     'IBM_GGP_JS1_Y':'Joystick 1 Y Axis',
     'IBM_GGP_JS2_X':'Joystick 2 X Axis',
     'IBM_GGP_JS2_Y':'Joystick 2 Y Axis',
+}
+
+ibm_15pin_half_axes_code_dict = {
     'IBM_GGP_JS1_XP':'Joystick 1 Positive X',
     'IBM_GGP_JS1_XN':'Joystick 1 Negative X',
     'IBM_GGP_JS1_YP':'Joystick 1 Positive Y',
@@ -272,7 +265,50 @@ ibm_15pin_code_dict = {
     'IBM_GGP_JS2_YN':'Joystick 2 Negative Y',
 }
 
+def dict_reverse_lookup(my_dict, value_to_find):
+    for key, value in my_dict.items():
+        if value == value_to_find:
+            return key
+    return None
+
 def creat_mapping_window(existing_rule=None):
+    def validate_dropdown_menus(event):
+        map_from_selected_option = map_from_option_var.get()
+        map_category_selected_option = map_to_category_option_var.get()
+
+        lookup_result = dict_reverse_lookup({**xbox1_button_code_dict, **xbox1_axes_code_dict}, map_from_selected_option)
+        if lookup_result is not None:
+            map_from_selected_option = lookup_result
+        if map_from_selected_option in list(xbox1_button_code_dict.keys()) + generic_usb_gamepad_buttons:
+            print("THIS IS A BUTTON")
+            """
+            usb gamepad buttons can be mapped to:
+            15-pin gamepad buttons
+            15-pin gamepad half axes
+            keyboard key
+            mouse button
+            """
+            if map_category_selected_option == "Keyboard":
+                map_to_code_dropdown['values'] = kb_code_list
+            if map_category_selected_option == "Mouse":
+                map_to_code_dropdown['values'] = mouse_button_code_dict
+
+        if map_from_selected_option in list(xbox1_axes_code_dict.keys()) + generic_usb_gamepad_axes:
+            """
+            usb gamepad axes can be mapped to:
+            15-pin gamepad axes
+            15-pin gamepad half axes (for xbox controller trigger only)
+            keyboard key
+            mouse axes
+            """
+            print("THIS IS AN AXIS")
+
+    profile_selection = profile_lstbox.curselection()
+    if len(profile_selection) <= 0:
+        return
+    pboard_type = gamepad_mapping_dict_list[profile_selection[0]].get('protocol_board', "Unknown")
+    usb_gamepad_type = gamepad_mapping_dict_list[profile_selection[0]].get('usb_gamepad_type', "Generic")
+
     rule_window = Toplevel(root)
     rule_window.title("Edit rules")
     rule_window.geometry("400x210")
@@ -285,33 +321,34 @@ def creat_mapping_window(existing_rule=None):
     map_to_label = Label(master=rule_window, text="Map To:")
     map_to_label.place(x=10, y=50)
 
-    current_gamepad_code_list = list(xbox1_bluetooth_code_dict.values())
+    current_gamepad_code_list = generic_usb_gamepad_buttons + generic_usb_gamepad_axes
+    if 'xbox one' in usb_gamepad_type.lower():
+        current_gamepad_code_list = list(xbox1_button_code_dict.values()) + list(xbox1_axes_code_dict.values())
 
     map_from_option_var = StringVar()
     map_from_option_var.set(current_gamepad_code_list[0])
-    map_from_dropdown = OptionMenu(rule_window, map_from_option_var, *current_gamepad_code_list)
+    map_from_dropdown = OptionMenu(rule_window, map_from_option_var, command=validate_dropdown_menus, *current_gamepad_code_list)
     map_from_dropdown.place(x=100, y=5, width=250)
 
     map_to_category_list = ["Keyboard", "Mouse"]
-    if 1:
+    if 'ibmpc' in pboard_type.lower():
         map_to_category_list.append("15-Pin Gamepad")
 
     map_to_category_option_var = StringVar()
     map_to_category_option_var.set(map_to_category_list[0])
-    map_to_category_dropdown = OptionMenu(rule_window, map_to_category_option_var, *map_to_category_list)
+    map_to_category_dropdown = OptionMenu(rule_window, map_to_category_option_var, command=validate_dropdown_menus, *map_to_category_list)
     map_to_category_dropdown.place(x=100, y=45, width=250)
 
-    map_to_code_list = list(ibm_15pin_code_dict.values())
+    map_to_code_list = kb_code_list
     map_to_code_dropdown = ttk.Combobox(rule_window)
     map_to_code_dropdown.place(x=100, y=80, width=250)
-    map_to_code_dropdown['values'] = map_to_code_list
 
-    secondary_map_to_code_dropdown = ttk.Combobox(rule_window)
+    secondary_map_to_code_dropdown = ttk.Combobox(rule_window, state=DISABLED)
     secondary_map_to_code_dropdown.place(x=100, y=110, width=250)
-    secondary_map_to_code_dropdown['values'] = map_to_code_list
 
     map_save_button = Button(rule_window, text="Save This Mapping", command=None, fg='red')
     map_save_button.place(x=10, y=140, width=380, height=25)
+    validate_dropdown_menus()
 
     def close_map_window():
         rule_window.destroy()
@@ -346,6 +383,7 @@ def profile_remove_click():
         mapping_save_button.config(state=DISABLED)
         pboard_dropdown.config(state=DISABLED)
         usb_gamepad_dropdown.config(state=DISABLED)
+        mappings_var.set([])
     update_profile_display()
 
 def profile_rename_click():
@@ -371,8 +409,9 @@ def profile_dupe_click():
     answer = clean_input(answer, len_limit=20)
     if len(answer) == 0:
         return
-    this_mapping = {'display_name': answer, 'device_type': 'protocol_list_gamepad', 'gamepad_type':'Generic', 'protocol_board': 'Unknown', 'protocol_name': 'OFF', 'mapping': {}}
-    gamepad_mapping_dict_list.insert(selection[0] + 1, this_mapping)
+    new_profile = copy.deepcopy(gamepad_mapping_dict_list[selection[0]])
+    new_profile['display_name'] = answer
+    gamepad_mapping_dict_list.insert(selection[0] + 1, new_profile)
     update_profile_display()
 
 BUTTON_WIDTH = 150
@@ -446,12 +485,26 @@ def load_gamepad_mapping(search_path):
     except Exception as e:
         print('load_gamepad_mapping:', e)
 
+def pboard_dropdown_change(event):
+    selection = profile_lstbox.curselection()
+    if len(selection) <= 0:
+        return
+    gamepad_mapping_dict_list[selection[0]]['protocol_board'] = pboard_option_var.get()
+    update_profile_display()
+
+def usb_gamepad_dropdown_change(event):
+    selection = profile_lstbox.curselection()
+    if len(selection) <= 0:
+        return
+    gamepad_mapping_dict_list[selection[0]]['usb_gamepad_type'] = usb_gamepad_option_var.get()
+    update_profile_display()
+
 protocol_board_dropdown_label = Label(master=options_lf, text="Protocol Card:")
 protocol_board_dropdown_label.place(x=10, y=5)
 protocol_board_list = ['Unknown', 'IBMPC', "ADB"]
 pboard_option_var = StringVar()
 pboard_option_var.set(protocol_board_list[0])
-pboard_dropdown = OptionMenu(options_lf, pboard_option_var, *protocol_board_list)
+pboard_dropdown = OptionMenu(options_lf, pboard_option_var, command=pboard_dropdown_change, *protocol_board_list)
 pboard_dropdown.place(x=10, y=30, width=150)
 pboard_dropdown.config(state=DISABLED)
 
@@ -460,7 +513,7 @@ usb_gamepad_type_dropdown_label.place(x=10, y=80)
 usb_gamepad_list = ['Generic', 'Xbox One Wired', "Xbox One Bluetooth"]
 usb_gamepad_option_var = StringVar()
 usb_gamepad_option_var.set(usb_gamepad_list[0])
-usb_gamepad_dropdown = OptionMenu(options_lf, usb_gamepad_option_var, *usb_gamepad_list)
+usb_gamepad_dropdown = OptionMenu(options_lf, usb_gamepad_option_var, command=usb_gamepad_dropdown_change, *usb_gamepad_list)
 usb_gamepad_dropdown.place(x=10, y=100, width=150)
 usb_gamepad_dropdown.config(state=DISABLED)
 
