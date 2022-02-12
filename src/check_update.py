@@ -43,7 +43,7 @@ def unzip_file(zip_path, extract_path):
     to_copy_path = os.path.join(extract_path, 'usb4vc')
     try:
         shutil.rmtree(to_copy_path)
-        time.sleep(0.05)
+        time.sleep(0.1)
     except Exception as e:
         pass
     try:

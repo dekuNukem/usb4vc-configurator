@@ -103,18 +103,29 @@ pc_app_update_label.config(text='This app (' + str(THIS_VERSION_NUMBER) + '): Un
 pc_app_update_label.unbind("<Button-1>")
 
 def update_copy_button_click():
-    rcode, msg = check_update.get_usb4vc_update(temp_path)
+    rcode, src_base_path = check_update.get_usb4vc_update(temp_path)
     if rcode != 0:
-        messagebox.showerror("Error", "Unable to fetch update: \n\n"+str(msg))
+        messagebox.showerror("Error", "Error Fetching Update: \n\n"+str(msg))
+        return
+    if len(dp_root_folder_path) < 2:
         return
     try:
-        dest_dir = os.path.join(dp_root_folder_path, 'usb4vc')
-        shutil.rmtree(dest_dir)
-        time.sleep(0.05)
+        dest_base_path = os.path.join(dp_root_folder_path, 'usb4vc')
+        dest_firmware_path = os.path.join(dest_base_path, 'firmware')
+        dest_rpi_app_path = os.path.join(dest_base_path, 'rpi_app')
+        ensure_dir(dest_base_path)
+        time.sleep(0.1)
+        shutil.rmtree(dest_rpi_app_path)
+        time.sleep(0.1)
+        shutil.rmtree(dest_firmware_path)
+        time.sleep(0.1)
     except Exception as e:
         pass
     try:
-        shutil.copytree(msg, dest_dir) 
+        src_firmware_path = os.path.join(src_base_path, 'firmware')
+        src_rpi_app_path = os.path.join(src_base_path, 'rpi_app')
+        shutil.copytree(src_firmware_path, dest_firmware_path)
+        shutil.copytree(src_rpi_app_path, dest_rpi_app_path)
     except Exception as e:
         messagebox.showerror("Error", "File Copy Failed: \n\n"+str(e))
     messagebox.showinfo("Update", "Done!")
