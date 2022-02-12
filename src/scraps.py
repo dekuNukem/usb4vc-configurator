@@ -13,6 +13,8 @@ except Exception as e:
 usb_gamepad_source + ' '*gap1 + dest_name + '\n'
 
 
-XB1W_STICK_L
-XB1W_
-XB1BT_
+    map_to_code_list = list(ibm_15pin_code_dict.values())
+    # map_to_code_option_var = StringVar()
+    # map_to_code_option_var.set(map_to_code_list[0])
+    # map_to_code_dropdown = OptionMenu(rule_window, map_to_code_option_var, *map_to_code_list)
+    # map_to_code_dropdown.place(x=370, y=45, width=250)
