@@ -1,30 +1,13 @@
-def unzip_file(zip_path, extract_path):
-    to_copy_path = os.path.join(extract_path, 'usb4vc')
-    try:
-        shutil.rmtree(to_copy_path)
-        time.sleep(0.05)
-    except Exception as e:
-        pass
-    try:
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            zip_ref.extractall(extract_path)
-    except Exception as e:
-        return 5, str(e) 
-    return 0, to_copy_path
+try:
+    with open(save_filename) as json_file:
+        temp = json.load(json_file)
+        if isinstance(temp, dict):
+            config_dict = temp
+        else:
+            raise ValueError("not a valid config file")
+except Exception as e:
+    pass
 
-
-def unzip_file(zip_path, extract_path):
-    base_path = os.path.join(extract_path, 'usb4vc')
-    firmware_path = os.path.join(base_path, 'firmware')
-    rpi_app_path = os.path.join(base_path, 'rpi_app')
-
-    ensure_dir(base_path)
-    try:
-        shutil.rmtree(firmware_path)
-        time.sleep(0.05)
-        shutil.rmtree(rpi_app_path)
-        time.sleep(0.05)
-    except Exception as e:
-        pass
-
-    return 0, base_path
+            # print(usb_gamepad_source, list(map_dict.values()))
+            # print(f'{usb_gamepad_source}\t\tREL_X\t\tREL_Y')
+usb_gamepad_source + ' '*gap1 + dest_name + '\n'
