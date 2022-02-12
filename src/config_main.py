@@ -195,114 +195,149 @@ mappings_lstbox = Listbox(mappings_lf, listvariable=mappings_var, height=16, exp
 mappings_lstbox.place(x=10, y=5, width=350, height=340)
 mappings_lstbox.config()
 
-generic_usb_gamepad_buttons = ["BTN_GAMEPAD", "BTN_SOUTH", "BTN_A", "BTN_EAST", "BTN_B", "BTN_C", "BTN_NORTH", "BTN_X", "BTN_WEST", "BTN_Y", "BTN_Z", "BTN_TL", "BTN_TR", "BTN_TL2", "BTN_TR2", "BTN_SELECT", "BTN_START", "BTN_MODE", "BTN_THUMBL", "BTN_THUMBR"]
-generic_usb_gamepad_axes = ["ABS_X", "ABS_Y", "ABS_Z", "ABS_RX", "ABS_RY", "ABS_RZ", "ABS_THROTTLE", "ABS_RUDDER", "ABS_WHEEL", "ABS_GAS", "ABS_BRAKE", "ABS_HAT0X", "ABS_HAT0Y", "ABS_HAT1X", "ABS_HAT1Y", "ABS_HAT2X", "ABS_HAT2Y", "ABS_HAT3X", "ABS_HAT3Y"]
+# code, display name, type
+generic_usb_gamepad_code_list = [("BTN_GAMEPAD", "BTN_GAMEPAD", "usb_gp_btn"),
+    ("BTN_SOUTH", "BTN_SOUTH", "usb_gp_btn"),
+    ("BTN_A", "BTN_A", "usb_gp_btn"),
+    ("BTN_EAST", "BTN_EAST", "usb_gp_btn"),
+    ("BTN_B", "BTN_B", "usb_gp_btn"),
+    ("BTN_C", "BTN_C", "usb_gp_btn"),
+    ("BTN_NORTH", "BTN_NORTH", "usb_gp_btn"),
+    ("BTN_X", "BTN_X", "usb_gp_btn"),
+    ("BTN_WEST", "BTN_WEST", "usb_gp_btn"),
+    ("BTN_Y", "BTN_Y", "usb_gp_btn"),
+    ("BTN_Z", "BTN_Z", "usb_gp_btn"),
+    ("BTN_TL", "BTN_TL", "usb_gp_btn"),
+    ("BTN_TR", "BTN_TR", "usb_gp_btn"),
+    ("BTN_TL2", "BTN_TL2", "usb_gp_btn"),
+    ("BTN_TR2", "BTN_TR2", "usb_gp_btn"),
+    ("BTN_SELECT", "BTN_SELECT", "usb_gp_btn"),
+    ("BTN_START", "BTN_START", "usb_gp_btn"),
+    ("BTN_MODE", "BTN_MODE", "usb_gp_btn"),
+    ("BTN_THUMBL", "BTN_THUMBL", "usb_gp_btn"),
+    ("BTN_THUMBR", "BTN_THUMBR", "usb_gp_btn"),
+    ("ABS_X", "ABS_X", "usb_abs_axis"),
+    ("ABS_Y", "ABS_Y", "usb_abs_axis"),
+    ("ABS_Z", "ABS_Z", "usb_abs_axis"),
+    ("ABS_RX", "ABS_RX", "usb_abs_axis"),
+    ("ABS_RY", "ABS_RY", "usb_abs_axis"),
+    ("ABS_RZ", "ABS_RZ", "usb_abs_axis"),
+    ("ABS_THROTTLE", "ABS_THROTTLE", "usb_abs_axis"),
+    ("ABS_RUDDER", "ABS_RUDDER", "usb_abs_axis"),
+    ("ABS_WHEEL", "ABS_WHEEL", "usb_abs_axis"),
+    ("ABS_GAS", "ABS_GAS", "usb_abs_axis"),
+    ("ABS_BRAKE", "ABS_BRAKE", "usb_abs_axis"),
+    ("ABS_HAT0X", "ABS_HAT0X", "usb_abs_axis"),
+    ("ABS_HAT0Y", "ABS_HAT0Y", "usb_abs_axis"),
+    ("ABS_HAT1X", "ABS_HAT1X", "usb_abs_axis"),
+    ("ABS_HAT1Y", "ABS_HAT1Y", "usb_abs_axis"),
+    ("ABS_HAT2X", "ABS_HAT2X", "usb_abs_axis"),
+    ("ABS_HAT2Y", "ABS_HAT2Y", "usb_abs_axis"),
+    ("ABS_HAT3X", "ABS_HAT3X", "usb_abs_axis"),
+    ("ABS_HAT3Y", "ABS_HAT3Y", "usb_abs_axis")]
 
-xbox1_button_code_dict = {
-    "XB1_A":"A Button",
-    "XB1_B":"B Button",
-    "XB1_X":"X Button",
-    "XB1_Y":"Y Button",
-    "XB1_LSB":"Left Stick Button",
-    "XB1_RSB":"Right Stick Button",
-    "XB1_LB":"LB Button",
-    "XB1_RB":"RB Button",
-    "XB1_VIEW":"View Button",
-    "XB1_MENU":"Menu Button",
-    "XB1_LOGO":"Xbox Button",
-}
+# code, display name, type
+xbox1_code_list = [("XB1_A", "A Button", "usb_gp_btn"),
+    ("XB1_B", "B Button", "usb_gp_btn"),
+    ("XB1_X", "X Button", "usb_gp_btn"),
+    ("XB1_Y", "Y Button", "usb_gp_btn"),
+    ("XB1_LSB", "L-Stick Button", "usb_gp_btn"),
+    ("XB1_RSB", "R-Stick Button", "usb_gp_btn"),
+    ("XB1_LB", "LB Button", "usb_gp_btn"),
+    ("XB1_RB", "RB Button", "usb_gp_btn"),
+    ("XB1_VIEW", "View Button", "usb_gp_btn"),
+    ("XB1_MENU", "Menu Button", "usb_gp_btn"),
+    ("XB1_LOGO", "Xbox Button", "usb_gp_btn"),
+    ("XB1_LSX", "L-Stick X", "usb_abs_axis"),
+    ("XB1_LSY", "L-Stick Y", "usb_abs_axis"),
+    ("XB1_RSX", "R-Stick X", "usb_abs_axis"),
+    ("XB1_RSY", "R-Stick Y", "usb_abs_axis"),
+    ("XB1_LT", "L-Trigger", "usb_abs_axis"),
+    ("XB1_RT", "R-Trigger", "usb_abs_axis"),
+    ("XB1_DPX", "D-pad X", "usb_abs_axis"),
+    ("XB1_DPY", "D-pad Y", "usb_abs_axis")]
 
-xbox1_axes_code_dict = {
-    "XB1_LSX":"Left Stick X",
-    "XB1_LSY":"Left Stick Y",
-    "XB1_RSX":"Right Stick X",
-    "XB1_RSY":"Right Stick Y",
-    "XB1_LT":"Left Trigger",
-    "XB1_RT":"Right Trigger",
-    "XB1_DPX":"D-pad X",
-    "XB1_DPY":"D-pad Y",
-}
+# code, display name, type
+kb_code_list = [("KEY_1", "KEY_1", "kb_key"), ("KEY_2", "KEY_2", "kb_key"), ("KEY_3", "KEY_3", "kb_key"), ("KEY_4", "KEY_4", "kb_key"), ("KEY_5", "KEY_5", "kb_key"), ("KEY_6", "KEY_6", "kb_key"), ("KEY_7", "KEY_7", "kb_key"), ("KEY_8", "KEY_8", "kb_key"), ("KEY_9", "KEY_9", "kb_key"), ("KEY_0", "KEY_0", "kb_key"), ("KEY_A", "KEY_A", "kb_key"), ("KEY_B", "KEY_B", "kb_key"), ("KEY_C", "KEY_C", "kb_key"), ("KEY_D", "KEY_D", "kb_key"), ("KEY_E", "KEY_E", "kb_key"), ("KEY_F", "KEY_F", "kb_key"), ("KEY_G", "KEY_G", "kb_key"), ("KEY_H", "KEY_H", "kb_key"), ("KEY_I", "KEY_I", "kb_key"), ("KEY_J", "KEY_J", "kb_key"), ("KEY_K", "KEY_K", "kb_key"), ("KEY_L", "KEY_L", "kb_key"), ("KEY_M", "KEY_M", "kb_key"), ("KEY_N", "KEY_N", "kb_key"), ("KEY_O", "KEY_O", "kb_key"), ("KEY_P", "KEY_P", "kb_key"), ("KEY_Q", "KEY_Q", "kb_key"), ("KEY_R", "KEY_R", "kb_key"), ("KEY_S", "KEY_S", "kb_key"), ("KEY_T", "KEY_T", "kb_key"), ("KEY_U", "KEY_U", "kb_key"), ("KEY_V", "KEY_V", "kb_key"), ("KEY_W", "KEY_W", "kb_key"), ("KEY_X", "KEY_X", "kb_key"), ("KEY_Y", "KEY_Y", "kb_key"), ("KEY_Z", "KEY_Z", "kb_key"), ("KEY_SPACE", "KEY_SPACE", "kb_key"), ("KEY_UP", "KEY_UP", "kb_key"), ("KEY_DOWN", "KEY_DOWN", "kb_key"), ("KEY_LEFT", "KEY_LEFT", "kb_key"), ("KEY_RIGHT", "KEY_RIGHT", "kb_key"), ("KEY_ESC", "KEY_ESC", "kb_key"), ("KEY_TAB", "KEY_TAB", "kb_key"), ("KEY_ENTER", "KEY_ENTER", "kb_key"), ("KEY_END", "KEY_END", "kb_key"), ("KEY_HOME", "KEY_HOME", "kb_key"), ("KEY_LEFTALT", "KEY_LEFTALT", "kb_key"), ("KEY_LEFTCTRL", "KEY_LEFTCTRL", "kb_key"), ("KEY_LEFTSHIFT", "KEY_LEFTSHIFT", "kb_key"), ("KEY_RIGHTALT", "KEY_RIGHTALT", "kb_key"), ("KEY_RIGHTCTRL", "KEY_RIGHTCTRL", "kb_key"), ("KEY_RIGHTSHIFT", "KEY_RIGHTSHIFT", "kb_key"), ("KEY_SCROLLLOCK", "KEY_SCROLLLOCK", "kb_key"), ("KEY_SYSRQ", "KEY_SYSRQ", "kb_key"), ("KEY_PAGEUP", "KEY_PAGEUP", "kb_key"), ("KEY_PAGEDOWN", "KEY_PAGEDOWN", "kb_key"), ("KEY_INSERT", "KEY_INSERT", "kb_key"), ("KEY_DELETE", "KEY_DELETE", "kb_key"), ("KEY_102ND", "KEY_102ND", "kb_key"), ("KEY_CAPSLOCK", "KEY_CAPSLOCK", "kb_key"), ("KEY_NUMLOCK", "KEY_NUMLOCK", "kb_key"), ("KEY_MINUS", "KEY_MINUS", "kb_key"), ("KEY_EQUAL", "KEY_EQUAL", "kb_key"), ("KEY_BACKSPACE", "KEY_BACKSPACE", "kb_key"), ("KEY_LEFTBRACE", "KEY_LEFTBRACE", "kb_key"), ("KEY_RIGHTBRACE", "KEY_RIGHTBRACE", "kb_key"), ("KEY_SEMICOLON", "KEY_SEMICOLON", "kb_key"), ("KEY_APOSTROPHE", "KEY_APOSTROPHE", "kb_key"), ("KEY_GRAVE", "KEY_GRAVE", "kb_key"), ("KEY_BACKSLASH", "KEY_BACKSLASH", "kb_key"), ("KEY_COMMA", "KEY_COMMA", "kb_key"), ("KEY_DOT", "KEY_DOT", "kb_key"), ("KEY_SLASH", "KEY_SLASH", "kb_key"), ("KEY_F1", "KEY_F1", "kb_key"), ("KEY_F2", "KEY_F2", "kb_key"), ("KEY_F3", "KEY_F3", "kb_key"), ("KEY_F4", "KEY_F4", "kb_key"), ("KEY_F5", "KEY_F5", "kb_key"), ("KEY_F6", "KEY_F6", "kb_key"), ("KEY_F7", "KEY_F7", "kb_key"), ("KEY_F8", "KEY_F8", "kb_key"), ("KEY_F9", "KEY_F9", "kb_key"), ("KEY_F10", "KEY_F10", "kb_key"), ("KEY_F11", "KEY_F11", "kb_key"), ("KEY_F12", "KEY_F12", "kb_key"), ("KEY_F13", "KEY_F13", "kb_key"), ("KEY_F14", "KEY_F14", "kb_key"), ("KEY_F15", "KEY_F15", "kb_key"), ("KEY_F16", "KEY_F16", "kb_key"), ("KEY_F17", "KEY_F17", "kb_key"), ("KEY_F18", "KEY_F18", "kb_key"), ("KEY_F19", "KEY_F19", "kb_key"), ("KEY_F20", "KEY_F20", "kb_key"), ("KEY_F21", "KEY_F21", "kb_key"), ("KEY_F22", "KEY_F22", "kb_key"), ("KEY_F23", "KEY_F23", "kb_key"), ("KEY_F24", "KEY_F24", "kb_key"), ("KEY_KP0", "KEY_KP0", "kb_key"), ("KEY_KP1", "KEY_KP1", "kb_key"), ("KEY_KP2", "KEY_KP2", "kb_key"), ("KEY_KP3", "KEY_KP3", "kb_key"), ("KEY_KP4", "KEY_KP4", "kb_key"), ("KEY_KP5", "KEY_KP5", "kb_key"), ("KEY_KP6", "KEY_KP6", "kb_key"), ("KEY_KP7", "KEY_KP7", "kb_key"), ("KEY_KP8", "KEY_KP8", "kb_key"), ("KEY_KP9", "KEY_KP9", "kb_key"), ("KEY_KPASTERISK", "KEY_KPASTERISK", "kb_key"), ("KEY_KPDOT", "KEY_KPDOT", "kb_key"), ("KEY_KPENTER", "KEY_KPENTER", "kb_key"), ("KEY_KPMINUS", "KEY_KPMINUS", "kb_key"), ("KEY_KPPLUS", "KEY_KPPLUS", "kb_key"), ("KEY_KPSLASH", "KEY_KPSLASH", "kb_key")]
 
-kb_code_list = [ "KEY_1", "KEY_2", "KEY_3", "KEY_4", "KEY_5", "KEY_6", "KEY_7", "KEY_8", "KEY_9", "KEY_0", "KEY_A", "KEY_B", "KEY_C", "KEY_D", "KEY_E", "KEY_F", "KEY_G", "KEY_H", "KEY_I", "KEY_J", "KEY_K", "KEY_L", "KEY_M", "KEY_N", "KEY_O", "KEY_P", "KEY_Q", "KEY_R", "KEY_S", "KEY_T", "KEY_U", "KEY_V", "KEY_W", "KEY_X", "KEY_Y", "KEY_Z", "KEY_SPACE", "KEY_UP", "KEY_DOWN", "KEY_LEFT", "KEY_RIGHT", "KEY_ESC", "KEY_TAB", "KEY_ENTER", "KEY_END", "KEY_HOME", "KEY_LEFTALT", "KEY_LEFTCTRL", "KEY_LEFTSHIFT", "KEY_RIGHTALT", "KEY_RIGHTCTRL", "KEY_RIGHTSHIFT", "KEY_SCROLLLOCK", "KEY_SYSRQ", "KEY_PAGEUP", "KEY_PAGEDOWN", "KEY_INSERT", "KEY_DELETE", "KEY_102ND", "KEY_CAPSLOCK", "KEY_NUMLOCK", "KEY_MINUS", "KEY_EQUAL", "KEY_BACKSPACE", "KEY_LEFTBRACE", "KEY_RIGHTBRACE", "KEY_SEMICOLON", "KEY_APOSTROPHE", "KEY_GRAVE", "KEY_BACKSLASH", "KEY_COMMA", "KEY_DOT", "KEY_SLASH", "KEY_F1", "KEY_F2", "KEY_F3", "KEY_F4", "KEY_F5", "KEY_F6", "KEY_F7", "KEY_F8", "KEY_F9", "KEY_F10", "KEY_F11", "KEY_F12", "KEY_F13", "KEY_F14", "KEY_F15", "KEY_F16", "KEY_F17", "KEY_F18", "KEY_F19", "KEY_F20", "KEY_F21", "KEY_F22", "KEY_F23", "KEY_F24", "KEY_KP0", "KEY_KP1", "KEY_KP2", "KEY_KP3", "KEY_KP4", "KEY_KP5", "KEY_KP6", "KEY_KP7", "KEY_KP8", "KEY_KP9", "KEY_KPASTERISK", "KEY_KPDOT", "KEY_KPENTER", "KEY_KPMINUS", "KEY_KPPLUS", "KEY_KPSLASH"]
-kb_code_unused = ["KEY_ZENKAKUHANKAKU", "KEY_RO", "KEY_KATAKANA", "KEY_HIRAGANA", "KEY_HENKAN", "KEY_KATAKANAHIRAGANA", "KEY_MUHENKAN", "KEY_MACRO", "KEY_MUTE", "KEY_VOLUMEDOWN", "KEY_VOLUMEUP", "KEY_POWER", "KEY_LINEFEED", "KEY_KPCOMMA", "KEY_KPEQUAL", "KEY_KPJPCOMMA", "KEY_KPLEFTPAREN", "KEY_KPRIGHTPAREN", "KEY_KPPLUSMINUS", "KEY_PAUSE", "KEY_SCALE", "KEY_HANGEUL", "KEY_HANGUEL", "KEY_HANJA", "KEY_YEN", "KEY_LEFTMETA", "KEY_RIGHTMETA", "KEY_COMPOSE", "KEY_STOP", "KEY_AGAIN", "KEY_PROPS", "KEY_UNDO", "KEY_FRONT", "KEY_COPY", "KEY_OPEN", "KEY_PASTE", "KEY_FIND", "KEY_CUT", "KEY_HELP", "KEY_MENU", "KEY_CALC", "KEY_SETUP", "KEY_SLEEP", "KEY_WAKEUP", "KEY_FILE", "KEY_SENDFILE", "KEY_DELETEFILE", "KEY_XFER", "KEY_PROG1", "KEY_PROG2", "KEY_WWW", "KEY_MSDOS", "KEY_COFFEE", "KEY_SCREENLOCK", "KEY_ROTATE_DISPLAY", "KEY_DIRECTION", "KEY_CYCLEWINDOWS", "KEY_MAIL", "KEY_BOOKMARKS", "KEY_COMPUTER", "KEY_BACK", "KEY_FORWARD", "KEY_CLOSECD", "KEY_EJECTCD", "KEY_EJECTCLOSECD", "KEY_NEXTSONG", "KEY_PLAYPAUSE", "KEY_PREVIOUSSONG", "KEY_STOPCD", "KEY_RECORD", "KEY_REWIND", "KEY_PHONE", "KEY_ISO", "KEY_CONFIG", "KEY_HOMEPAGE", "KEY_REFRESH", "KEY_EXIT", "KEY_MOVE", "KEY_EDIT", "KEY_SCROLLUP", "KEY_SCROLLDOWN", "KEY_NEW", "KEY_REDO"]
+# code, display name, type
+mouse_code_list = [("BTN_LEFT", "Left Button", "mouse_btn"),
+    ("BTN_RIGHT", "Right Button", "mouse_btn"),
+    ("BTN_MIDDLE", "Middle Button", "mouse_btn"),
+    ("BTN_SIDE", "Side Button", "mouse_btn"),
+    ("BTN_EXTRA", "Extra Button", "mouse_btn"),
+    ("REL_X", "Mouse X", "usb_rel_axis"),
+    ("REL_Y", "Mouse Y", "usb_rel_axis"),
+    ("REL_Z", "Scroll", "usb_rel_axis")]
 
-mouse_button_code_dict = {
-    "BTN_LEFT":"Left Button",
-    "BTN_RIGHT":"Right Button",
-    "BTN_MIDDLE":"Middle Button",
-    "BTN_SIDE":"Side Button",
-    "BTN_EXTRA":"Extra Button",
-}
+# code, display name, type
+ibm_15pin_gamepad_code_list = [('IBM_GGP_BTN_1', 'Button1', 'ibm_ggp_btn'),
+    ('IBM_GGP_BTN_2', 'Button2', 'ibm_ggp_btn'),
+    ('IBM_GGP_BTN_3', 'Button3', 'ibm_ggp_btn'),
+    ('IBM_GGP_BTN_4', 'Button4', 'ibm_ggp_btn'),
+    ('IBM_GGP_JS1_X', 'JS1 X-Axis', 'ibm_ggp_axis'),
+    ('IBM_GGP_JS1_Y', 'JS1 Y-Axis', 'ibm_ggp_axis'),
+    ('IBM_GGP_JS2_X', 'JS2 X-Axis', 'ibm_ggp_axis'),
+    ('IBM_GGP_JS2_Y', 'JS2 Y-Axis', 'ibm_ggp_axis'),
+    ('IBM_GGP_JS1_XP', 'JS1 Positive X', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS1_XN', 'JS1 Negative X', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS1_YP', 'JS1 Positive Y', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS1_YN', 'JS1 Negative Y', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS2_XP', 'JS2 Positive X', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS2_XN', 'JS2 Negative X', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS2_YP', 'JS2 Positive Y', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS2_YN', 'JS2 Negative Y', 'ibm_ggp_half_axis')]
 
-mouse_axes_code_dict = {
-    "REL_X":"Mouse X",
-    "REL_Y":"Mouse Y",
-    "REL_Z":"Vertical Scroll",
-}
-
-ibm_15pin_button_code_dict = {
-    'IBM_GGP_BTN_1':'Button 1',
-    'IBM_GGP_BTN_2':'Button 2',
-    'IBM_GGP_BTN_3':'Button 3',
-    'IBM_GGP_BTN_4':'Button 4',
-}
-
-ibm_15pin_half_axes_code_dict = {
-    'IBM_GGP_JS1_X':'Joystick 1 X Axis',
-    'IBM_GGP_JS1_Y':'Joystick 1 Y Axis',
-    'IBM_GGP_JS2_X':'Joystick 2 X Axis',
-    'IBM_GGP_JS2_Y':'Joystick 2 Y Axis',
-}
-
-ibm_15pin_half_axes_code_dict = {
-    'IBM_GGP_JS1_XP':'Joystick 1 Positive X',
-    'IBM_GGP_JS1_XN':'Joystick 1 Negative X',
-    'IBM_GGP_JS1_YP':'Joystick 1 Positive Y',
-    'IBM_GGP_JS1_YN':'Joystick 1 Negative Y',
-    'IBM_GGP_JS2_XP':'Joystick 2 Positive X',
-    'IBM_GGP_JS2_XN':'Joystick 2 Negative X',
-    'IBM_GGP_JS2_YP':'Joystick 2 Positive Y',
-    'IBM_GGP_JS2_YN':'Joystick 2 Negative Y',
-}
-
-def dict_reverse_lookup(my_dict, value_to_find):
-    for key, value in my_dict.items():
-        if value == value_to_find:
-            return key
-    return None
+def tuple_list_displayname_search(tup_list, query):
+    for item in tup_list:
+        if query == item[1]:
+            return item
+    return None, None, None
 
 def creat_mapping_window(existing_rule=None):
     def validate_dropdown_menus(event):
         map_from_selected_option = map_from_option_var.get()
         map_category_selected_option = map_to_category_option_var.get()
-
-        lookup_result = dict_reverse_lookup({**xbox1_button_code_dict, **xbox1_axes_code_dict}, map_from_selected_option)
-        if lookup_result is not None:
-            map_from_selected_option = lookup_result
-        if map_from_selected_option in list(xbox1_button_code_dict.keys()) + generic_usb_gamepad_buttons:
-            print("THIS IS A BUTTON")
+        this_code, this_display_name, this_type = tuple_list_displayname_search(xbox1_code_list + generic_usb_gamepad_code_list, map_from_selected_option)
+        if this_code is None:
+            return
+        secondary_map_to_code_dropdown.set('')
+        map_to_code_dropdown.set('')
+        secondary_map_to_code_dropdown['values'] = []
+        secondary_map_to_code_dropdown.config(state=DISABLED)
+        if this_type == 'usb_gp_btn':
             """
             usb gamepad buttons can be mapped to:
-            15-pin gamepad buttons
-            15-pin gamepad half axes
             keyboard key
             mouse button
+            15-pin gamepad buttons
+            15-pin gamepad half axes
             """
             if map_category_selected_option == "Keyboard":
-                map_to_code_dropdown['values'] = kb_code_list
-            if map_category_selected_option == "Mouse":
-                map_to_code_dropdown['values'] = mouse_button_code_dict
+                map_to_code_dropdown['values'] = [x[1] for x in kb_code_list if x[2] == 'kb_key']
+            elif map_category_selected_option == "Mouse":
+                map_to_code_dropdown['values'] = [x[1] for x in mouse_code_list if x[2] == 'mouse_btn']
+            elif map_category_selected_option == "15-Pin Gamepad":
+                map_to_code_dropdown['values'] = [x[1] for x in ibm_15pin_gamepad_code_list if x[2] == 'ibm_ggp_btn' or x[2] == 'ibm_ggp_half_axis']
 
-        if map_from_selected_option in list(xbox1_axes_code_dict.keys()) + generic_usb_gamepad_axes:
+        if this_type == 'usb_abs_axis':
             """
             usb gamepad axes can be mapped to:
-            15-pin gamepad axes
-            15-pin gamepad half axes (for xbox controller trigger only)
             keyboard key
             mouse axes
+            15-pin gamepad axes
+            15-pin gamepad half axes (for xbox controller analog trigger only)
             """
-            print("THIS IS AN AXIS")
-
+            if map_category_selected_option == "Keyboard":
+                map_to_code_dropdown['values'] = [x[1] for x in kb_code_list if x[2] == 'kb_key']
+                # ENABLE SECOND DROPDOWN HERE
+                secondary_map_to_code_dropdown.config(state=NORMAL)
+                secondary_map_to_code_dropdown['values'] = [x[1] for x in kb_code_list if x[2] == 'kb_key']
+            elif map_category_selected_option == "Mouse":
+                map_to_code_dropdown['values'] = [x[1] for x in mouse_code_list if x[2] == 'usb_rel_axis']
+            elif map_category_selected_option == "15-Pin Gamepad":
+                map_to_code_dropdown['values'] = [x[1] for x in ibm_15pin_gamepad_code_list if x[2] == 'ibm_ggp_axis' or x[2] == 'ibm_ggp_half_axis']
+            
     profile_selection = profile_lstbox.curselection()
     if len(profile_selection) <= 0:
         return
@@ -321,9 +356,11 @@ def creat_mapping_window(existing_rule=None):
     map_to_label = Label(master=rule_window, text="Map To:")
     map_to_label.place(x=10, y=50)
 
-    current_gamepad_code_list = generic_usb_gamepad_buttons + generic_usb_gamepad_axes
+    current_gamepad_code_list = generic_usb_gamepad_code_list
     if 'xbox one' in usb_gamepad_type.lower():
-        current_gamepad_code_list = list(xbox1_button_code_dict.values()) + list(xbox1_axes_code_dict.values())
+        current_gamepad_code_list = xbox1_code_list
+
+    current_gamepad_code_list = [x[1] for x in current_gamepad_code_list]
 
     map_from_option_var = StringVar()
     map_from_option_var.set(current_gamepad_code_list[0])
@@ -339,19 +376,35 @@ def creat_mapping_window(existing_rule=None):
     map_to_category_dropdown = OptionMenu(rule_window, map_to_category_option_var, command=validate_dropdown_menus, *map_to_category_list)
     map_to_category_dropdown.place(x=100, y=45, width=250)
 
-    map_to_code_list = kb_code_list
     map_to_code_dropdown = ttk.Combobox(rule_window)
     map_to_code_dropdown.place(x=100, y=80, width=250)
 
     secondary_map_to_code_dropdown = ttk.Combobox(rule_window, state=DISABLED)
     secondary_map_to_code_dropdown.place(x=100, y=110, width=250)
 
-    map_save_button = Button(rule_window, text="Save This Mapping", command=None, fg='red')
-    map_save_button.place(x=10, y=140, width=380, height=25)
-    validate_dropdown_menus()
-
     def close_map_window():
+        update_profile_display()
         rule_window.destroy()
+
+    def save_this_mapping():
+        selection = profile_lstbox.curselection()
+        if len(selection) <= 0:
+            return
+        map_from_code = map_from_option_var.get()
+        map_to_code1 = map_to_code_dropdown.get()
+        map_to_code2 = secondary_map_to_code_dropdown.get()
+        if len(map_from_code) == 0 or len(map_to_code1) == 0:
+            return
+        this_map_dict = {'code':map_to_code1}
+        if len(map_to_code2) > 0:
+            this_map_dict['code_neg'] = map_to_code2
+        gamepad_mapping_dict_list[selection[0]]['mapping'][map_from_code] = this_map_dict
+        print(gamepad_mapping_dict_list[selection[0]]['mapping'])
+        close_map_window()
+
+    map_save_button = Button(rule_window, text="Save This Mapping", command=save_this_mapping, fg='red')
+    map_save_button.place(x=10, y=140, width=380, height=25)
+    validate_dropdown_menus(None)
 
     map_cancel_button = Button(rule_window, text="Cancel", command=close_map_window)
     map_cancel_button.place(x=10, y=175, width=380, height=25)
