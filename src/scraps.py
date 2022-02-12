@@ -68,3 +68,20 @@ def map_to_category_dropdown_change(event):
             mouse axes
             """
             print("THIS IS AN AXIS")
+
+
+def save_mapping_to_file():
+    # check if target is same as temp
+    print('----------')
+
+    filename_set = set()
+    for item in gamepad_mapping_dict_list:
+        filename = clean_input(item['display_name'], len_limit=20, clean_filename=True).lower()
+        
+    for item in gamepad_mapping_dict_list:
+        print(filename)
+        print(json.dumps(item, sort_keys=True))
+
+
+# temp_path = "C:\\Users\\allen\\AppData\\Roaming\\dekuNukem\\usb4vc_config\\temp"
+# print(get_usb4vc_update(temp_path))

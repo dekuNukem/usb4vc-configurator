@@ -59,6 +59,3 @@ def get_usb4vc_update(temp_path):
         return rcode, msg
     rcode, msg = unzip_file(msg, temp_path)
     return rcode, msg
-
-# temp_path = "C:\\Users\\allen\\AppData\\Roaming\\dekuNukem\\usb4vc_config\\temp"
-# print(get_usb4vc_update(temp_path))

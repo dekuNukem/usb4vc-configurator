@@ -66,7 +66,7 @@ def backup_button_click():
     else:
         webbrowser.open(backup_path)
 
-invalid_filename_characters = ['<', '>', ':', '"', '/', '\\', '|', '?', '*']
+invalid_filename_characters = ['<', '>', ':', '"', '/', '\\', '|', '?', '*', ' ']
 def clean_input(str_input, len_limit=None, clean_filename=False):
     result = ''.join([x for x in str_input if 32 <= ord(x) <= 126 and x not in invalid_filename_characters])
     if clean_filename is False:
@@ -163,9 +163,6 @@ def update_profile_display():
     usb_gamepad_dropdown.config(state=NORMAL)
     mapping_add_button.config(state=NORMAL)
     mapping_remove_button.config(state=NORMAL)
-    mapping_edit_button.config(state=NORMAL)
-    mapping_dupe_button.config(state=NORMAL)
-    mapping_save_button.config(state=NORMAL)
     print(gamepad_mapping_dict_list[index])
     pboard_option_var.set(str(gamepad_mapping_dict_list[index].get('protocol_board', "Unknown")))
     usb_gamepad_option_var.set(str(gamepad_mapping_dict_list[index].get('usb_gamepad_type', "Generic")))
@@ -261,32 +258,32 @@ xbox1_code_list = [("XB1_A", "A Button", "usb_gp_btn"),
 kb_code_list = [("KEY_1", "KEY_1", "kb_key"), ("KEY_2", "KEY_2", "kb_key"), ("KEY_3", "KEY_3", "kb_key"), ("KEY_4", "KEY_4", "kb_key"), ("KEY_5", "KEY_5", "kb_key"), ("KEY_6", "KEY_6", "kb_key"), ("KEY_7", "KEY_7", "kb_key"), ("KEY_8", "KEY_8", "kb_key"), ("KEY_9", "KEY_9", "kb_key"), ("KEY_0", "KEY_0", "kb_key"), ("KEY_A", "KEY_A", "kb_key"), ("KEY_B", "KEY_B", "kb_key"), ("KEY_C", "KEY_C", "kb_key"), ("KEY_D", "KEY_D", "kb_key"), ("KEY_E", "KEY_E", "kb_key"), ("KEY_F", "KEY_F", "kb_key"), ("KEY_G", "KEY_G", "kb_key"), ("KEY_H", "KEY_H", "kb_key"), ("KEY_I", "KEY_I", "kb_key"), ("KEY_J", "KEY_J", "kb_key"), ("KEY_K", "KEY_K", "kb_key"), ("KEY_L", "KEY_L", "kb_key"), ("KEY_M", "KEY_M", "kb_key"), ("KEY_N", "KEY_N", "kb_key"), ("KEY_O", "KEY_O", "kb_key"), ("KEY_P", "KEY_P", "kb_key"), ("KEY_Q", "KEY_Q", "kb_key"), ("KEY_R", "KEY_R", "kb_key"), ("KEY_S", "KEY_S", "kb_key"), ("KEY_T", "KEY_T", "kb_key"), ("KEY_U", "KEY_U", "kb_key"), ("KEY_V", "KEY_V", "kb_key"), ("KEY_W", "KEY_W", "kb_key"), ("KEY_X", "KEY_X", "kb_key"), ("KEY_Y", "KEY_Y", "kb_key"), ("KEY_Z", "KEY_Z", "kb_key"), ("KEY_SPACE", "KEY_SPACE", "kb_key"), ("KEY_UP", "KEY_UP", "kb_key"), ("KEY_DOWN", "KEY_DOWN", "kb_key"), ("KEY_LEFT", "KEY_LEFT", "kb_key"), ("KEY_RIGHT", "KEY_RIGHT", "kb_key"), ("KEY_ESC", "KEY_ESC", "kb_key"), ("KEY_TAB", "KEY_TAB", "kb_key"), ("KEY_ENTER", "KEY_ENTER", "kb_key"), ("KEY_END", "KEY_END", "kb_key"), ("KEY_HOME", "KEY_HOME", "kb_key"), ("KEY_LEFTALT", "KEY_LEFTALT", "kb_key"), ("KEY_LEFTCTRL", "KEY_LEFTCTRL", "kb_key"), ("KEY_LEFTSHIFT", "KEY_LEFTSHIFT", "kb_key"), ("KEY_RIGHTALT", "KEY_RIGHTALT", "kb_key"), ("KEY_RIGHTCTRL", "KEY_RIGHTCTRL", "kb_key"), ("KEY_RIGHTSHIFT", "KEY_RIGHTSHIFT", "kb_key"), ("KEY_SCROLLLOCK", "KEY_SCROLLLOCK", "kb_key"), ("KEY_SYSRQ", "KEY_SYSRQ", "kb_key"), ("KEY_PAGEUP", "KEY_PAGEUP", "kb_key"), ("KEY_PAGEDOWN", "KEY_PAGEDOWN", "kb_key"), ("KEY_INSERT", "KEY_INSERT", "kb_key"), ("KEY_DELETE", "KEY_DELETE", "kb_key"), ("KEY_102ND", "KEY_102ND", "kb_key"), ("KEY_CAPSLOCK", "KEY_CAPSLOCK", "kb_key"), ("KEY_NUMLOCK", "KEY_NUMLOCK", "kb_key"), ("KEY_MINUS", "KEY_MINUS", "kb_key"), ("KEY_EQUAL", "KEY_EQUAL", "kb_key"), ("KEY_BACKSPACE", "KEY_BACKSPACE", "kb_key"), ("KEY_LEFTBRACE", "KEY_LEFTBRACE", "kb_key"), ("KEY_RIGHTBRACE", "KEY_RIGHTBRACE", "kb_key"), ("KEY_SEMICOLON", "KEY_SEMICOLON", "kb_key"), ("KEY_APOSTROPHE", "KEY_APOSTROPHE", "kb_key"), ("KEY_GRAVE", "KEY_GRAVE", "kb_key"), ("KEY_BACKSLASH", "KEY_BACKSLASH", "kb_key"), ("KEY_COMMA", "KEY_COMMA", "kb_key"), ("KEY_DOT", "KEY_DOT", "kb_key"), ("KEY_SLASH", "KEY_SLASH", "kb_key"), ("KEY_F1", "KEY_F1", "kb_key"), ("KEY_F2", "KEY_F2", "kb_key"), ("KEY_F3", "KEY_F3", "kb_key"), ("KEY_F4", "KEY_F4", "kb_key"), ("KEY_F5", "KEY_F5", "kb_key"), ("KEY_F6", "KEY_F6", "kb_key"), ("KEY_F7", "KEY_F7", "kb_key"), ("KEY_F8", "KEY_F8", "kb_key"), ("KEY_F9", "KEY_F9", "kb_key"), ("KEY_F10", "KEY_F10", "kb_key"), ("KEY_F11", "KEY_F11", "kb_key"), ("KEY_F12", "KEY_F12", "kb_key"), ("KEY_F13", "KEY_F13", "kb_key"), ("KEY_F14", "KEY_F14", "kb_key"), ("KEY_F15", "KEY_F15", "kb_key"), ("KEY_F16", "KEY_F16", "kb_key"), ("KEY_F17", "KEY_F17", "kb_key"), ("KEY_F18", "KEY_F18", "kb_key"), ("KEY_F19", "KEY_F19", "kb_key"), ("KEY_F20", "KEY_F20", "kb_key"), ("KEY_F21", "KEY_F21", "kb_key"), ("KEY_F22", "KEY_F22", "kb_key"), ("KEY_F23", "KEY_F23", "kb_key"), ("KEY_F24", "KEY_F24", "kb_key"), ("KEY_KP0", "KEY_KP0", "kb_key"), ("KEY_KP1", "KEY_KP1", "kb_key"), ("KEY_KP2", "KEY_KP2", "kb_key"), ("KEY_KP3", "KEY_KP3", "kb_key"), ("KEY_KP4", "KEY_KP4", "kb_key"), ("KEY_KP5", "KEY_KP5", "kb_key"), ("KEY_KP6", "KEY_KP6", "kb_key"), ("KEY_KP7", "KEY_KP7", "kb_key"), ("KEY_KP8", "KEY_KP8", "kb_key"), ("KEY_KP9", "KEY_KP9", "kb_key"), ("KEY_KPASTERISK", "KEY_KPASTERISK", "kb_key"), ("KEY_KPDOT", "KEY_KPDOT", "kb_key"), ("KEY_KPENTER", "KEY_KPENTER", "kb_key"), ("KEY_KPMINUS", "KEY_KPMINUS", "kb_key"), ("KEY_KPPLUS", "KEY_KPPLUS", "kb_key"), ("KEY_KPSLASH", "KEY_KPSLASH", "kb_key")]
 
 # code, display name, type
-mouse_code_list = [("BTN_LEFT", "Left Button", "mouse_btn"),
-    ("BTN_RIGHT", "Right Button", "mouse_btn"),
-    ("BTN_MIDDLE", "Middle Button", "mouse_btn"),
-    ("BTN_SIDE", "Side Button", "mouse_btn"),
-    ("BTN_EXTRA", "Extra Button", "mouse_btn"),
+mouse_code_list = [("BTN_LEFT", "Mouse Left", "mouse_btn"),
+    ("BTN_RIGHT", "Mouse Right", "mouse_btn"),
+    ("BTN_MIDDLE", "Mouse Middle", "mouse_btn"),
+    ("BTN_SIDE", "Mouse Side", "mouse_btn"),
+    ("BTN_EXTRA", "Mouse Extra", "mouse_btn"),
     ("REL_X", "Mouse X", "usb_rel_axis"),
     ("REL_Y", "Mouse Y", "usb_rel_axis"),
-    ("REL_Z", "Scroll", "usb_rel_axis")]
+    ("REL_Z", "Mouse Scroll", "usb_rel_axis")]
 
 # code, display name, type
-ibm_15pin_gamepad_code_list = [('IBM_GGP_BTN_1', 'Button1', 'ibm_ggp_btn'),
-    ('IBM_GGP_BTN_2', 'Button2', 'ibm_ggp_btn'),
-    ('IBM_GGP_BTN_3', 'Button3', 'ibm_ggp_btn'),
-    ('IBM_GGP_BTN_4', 'Button4', 'ibm_ggp_btn'),
-    ('IBM_GGP_JS1_X', 'JS1 X-Axis', 'ibm_ggp_axis'),
-    ('IBM_GGP_JS1_Y', 'JS1 Y-Axis', 'ibm_ggp_axis'),
-    ('IBM_GGP_JS2_X', 'JS2 X-Axis', 'ibm_ggp_axis'),
-    ('IBM_GGP_JS2_Y', 'JS2 Y-Axis', 'ibm_ggp_axis'),
-    ('IBM_GGP_JS1_XP', 'JS1 Positive X', 'ibm_ggp_half_axis'),
-    ('IBM_GGP_JS1_XN', 'JS1 Negative X', 'ibm_ggp_half_axis'),
-    ('IBM_GGP_JS1_YP', 'JS1 Positive Y', 'ibm_ggp_half_axis'),
-    ('IBM_GGP_JS1_YN', 'JS1 Negative Y', 'ibm_ggp_half_axis'),
-    ('IBM_GGP_JS2_XP', 'JS2 Positive X', 'ibm_ggp_half_axis'),
-    ('IBM_GGP_JS2_XN', 'JS2 Negative X', 'ibm_ggp_half_axis'),
-    ('IBM_GGP_JS2_YP', 'JS2 Positive Y', 'ibm_ggp_half_axis'),
-    ('IBM_GGP_JS2_YN', 'JS2 Negative Y', 'ibm_ggp_half_axis')]
+ibm_15pin_gamepad_code_list = [('IBM_GGP_BTN_1', '15P Button 1', 'ibm_ggp_btn'),
+    ('IBM_GGP_BTN_2', '15P Button 2', 'ibm_ggp_btn'),
+    ('IBM_GGP_BTN_3', '15P Button 3', 'ibm_ggp_btn'),
+    ('IBM_GGP_BTN_4', '15P Button 4', 'ibm_ggp_btn'),
+    ('IBM_GGP_JS1_X', '15P JS1 X-Axis', 'ibm_ggp_axis'),
+    ('IBM_GGP_JS1_Y', '15P JS1 Y-Axis', 'ibm_ggp_axis'),
+    ('IBM_GGP_JS2_X', '15P JS2 X-Axis', 'ibm_ggp_axis'),
+    ('IBM_GGP_JS2_Y', '15P JS2 Y-Axis', 'ibm_ggp_axis'),
+    ('IBM_GGP_JS1_XP', '15P JS1 Positive X', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS1_XN', '15P JS1 Negative X', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS1_YP', '15P JS1 Positive Y', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS1_YN', '15P JS1 Negative Y', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS2_XP', '15P JS2 Positive X', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS2_XN', '15P JS2 Negative X', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS2_YP', '15P JS2 Positive Y', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS2_YN', '15P JS2 Negative Y', 'ibm_ggp_half_axis')]
 
 def tuple_list_displayname_search(tup_list, query):
     for item in tup_list:
@@ -294,7 +291,7 @@ def tuple_list_displayname_search(tup_list, query):
             return item
     return None, None, None
 
-def creat_mapping_window(existing_rule=None):
+def create_mapping_window(existing_rule=None):
     def validate_dropdown_menus(event):
         map_from_selected_option = map_from_option_var.get()
         map_category_selected_option = map_to_category_option_var.get()
@@ -430,10 +427,7 @@ def profile_remove_click():
     profile_lstbox.selection_set(selection[0])
     if len(gamepad_mapping_dict_list) <= 0 or len(profile_lstbox.curselection()) <= 0:
         mapping_add_button.config(state=DISABLED)
-        mapping_edit_button.config(state=DISABLED)
-        mapping_dupe_button.config(state=DISABLED)
         mapping_remove_button.config(state=DISABLED)
-        mapping_save_button.config(state=DISABLED)
         pboard_dropdown.config(state=DISABLED)
         usb_gamepad_dropdown.config(state=DISABLED)
         mappings_var.set([])
@@ -467,6 +461,48 @@ def profile_dupe_click():
     gamepad_mapping_dict_list.insert(selection[0] + 1, new_profile)
     update_profile_display()
 
+def mapping_remove_click():
+    profile_index = profile_lstbox.curselection()
+    if len(profile_index) <= 0:
+        return
+    profile_index = profile_index[0]
+
+    mapping_index = mappings_lstbox.curselection()
+    if len(mapping_index) <= 0:
+        return
+    mapping_index = mapping_index[0]
+
+    key_to_delete = list(gamepad_mapping_dict_list[profile_index]['mapping'].keys())[mapping_index]
+    gamepad_mapping_dict_list[profile_index]['mapping'].pop(key_to_delete, None)
+    update_profile_display()
+
+def make_default_backup_dir_name():
+    return 'usb4vc_backup_' + datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
+
+def save_mapping_to_file():
+    # check if target is same as temp
+    print('----------')
+    this_backup_dir = os.path.join(backup_path, make_default_backup_dir_name())
+    ensure_dir(this_backup_dir)
+
+    for item in gamepad_mapping_dict_list:
+        filename = clean_input(f'usb4vc_map_{item["display_name"]}_{item["protocol_board"]}.json', clean_filename=True).lower()
+        backup_dest = os.path.join(this_backup_dir, filename)
+        try:
+            with open(backup_dest, 'w', encoding='utf-8') as save_file:
+                save_file.write(json.dumps(item, sort_keys=True))
+        except Exception as e:
+            messagebox.showerror("Error", "Saving Backup Failed!\n\n"+str(e))
+
+    # for item in gamepad_mapping_dict_list:
+    #     print(filename)
+    #     print()
+
+    # print(this_backup_dir)
+    # print("delete all mapping in here:", flash_drive_config_path)
+
+
+
 BUTTON_WIDTH = 150
 BUTTON_HEIGHT = 25
 
@@ -482,19 +518,13 @@ profile_rename_button.place(x=10, y=350, width=BUTTON_WIDTH, height=BUTTON_HEIGH
 profile_remove_button = Button(profiles_lf, text="Remove", command=profile_remove_click, state=DISABLED)
 profile_remove_button.place(x=10, y=380, width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
 
-mapping_add_button = Button(mappings_lf, text="New", command=creat_mapping_window, state=DISABLED)
-mapping_add_button.place(x=20, y=350, width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+mapping_add_button = Button(mappings_lf, text="New", command=create_mapping_window, state=DISABLED)
+mapping_add_button.place(x=20, y=350, width=330, height=BUTTON_HEIGHT)
 
-mapping_edit_button = Button(mappings_lf, text="Edit", command=None, state=DISABLED)
-mapping_edit_button.place(x=200, y=350, width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+mapping_remove_button = Button(mappings_lf, text="Remove", command=mapping_remove_click, state=DISABLED)
+mapping_remove_button.place(x=20, y=380, width=330, height=BUTTON_HEIGHT)
 
-mapping_dupe_button = Button(mappings_lf, text="Duplicate", command=None, state=DISABLED)
-mapping_dupe_button.place(x=20, y=380, width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
-
-mapping_remove_button = Button(mappings_lf, text="Remove", command=None, state=DISABLED)
-mapping_remove_button.place(x=200, y=380, width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
-
-mapping_save_button = Button(gamepad_config_lf, text="Write Current Mappings to Flash Drive", command=None, state=DISABLED, fg='red')
+mapping_save_button = Button(gamepad_config_lf, text="Write Current Mappings to Flash Drive", command=save_mapping_to_file, state=DISABLED, fg='red')
 mapping_save_button.place(x=10, y=447, width=755, height=BUTTON_HEIGHT)
 
 def enable_profile_buttons():
@@ -503,6 +533,7 @@ def enable_profile_buttons():
     profile_remove_button.config(state=NORMAL)
     profile_rename_button.config(state=NORMAL)
     profile_dupe_button.config(state=NORMAL)
+    mapping_save_button.config(state=NORMAL)
 
 def select_root_folder(root_path=None):
     global root_folder_path
