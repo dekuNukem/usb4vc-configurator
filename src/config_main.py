@@ -14,7 +14,7 @@ import shutil
 
 THIS_VERSION_NUMBER = '0.0.1'
 MAIN_WINDOW_WIDTH = 800
-MAIN_WINDOW_HEIGHT = 620
+MAIN_WINDOW_HEIGHT = 650
 PADDING = 10
 HEIGHT_CONNECT_LF = 60
 
@@ -123,7 +123,7 @@ def update_copy_button_click():
 copy_button = Button(updates_lf, text="Copy Latest USB4VC Updates to Flash Drive", command=update_copy_button_click, state=DISABLED)
 copy_button.place(x=10, y=5, width=300)
 
-gamepad_config_lf = LabelFrame(root, text="Custom Gamepad Mappings", width=MAIN_WINDOW_WIDTH - PADDING*2, height=470)
+gamepad_config_lf = LabelFrame(root, text="Custom Gamepad Mappings", width=MAIN_WINDOW_WIDTH - PADDING*2, height=500)
 gamepad_config_lf.place(x=PADDING, y=140)
 
 profiles_lf = LabelFrame(gamepad_config_lf, text="Profiles", width=180, height=435)
@@ -148,6 +148,10 @@ def update_profile_display():
     index = profile_lstbox.curselection()[0]
     pboard_dropdown.config(state=NORMAL)
     usb_gamepad_dropdown.config(state=NORMAL)
+    mapping_add_button.config(state=NORMAL)
+    mapping_remove_button.config(state=NORMAL)
+    mapping_edit_button.config(state=NORMAL)
+    mapping_dupe_button.config(state=NORMAL)
     print(gamepad_mapping_dict_list[index])
     pboard_option_var.set(str(gamepad_mapping_dict_list[index].get('protocol_board', "Unknown")))
     usb_gamepad_option_var.set(str(gamepad_mapping_dict_list[index].get('usb_gamepad_type', "Generic")))
@@ -174,7 +178,7 @@ profile_lstbox.bind('<<ListboxSelect>>', on_profile_lstbox_select)
 
 mappings_var = StringVar()
 mappings_lstbox = Listbox(mappings_lf, listvariable=mappings_var, height=16, exportselection=0, font='TkFixedFont')
-mappings_lstbox.place(x=5, y=5, width=350, height=350)
+mappings_lstbox.place(x=10, y=5, width=350, height=340)
 mappings_lstbox.config()
 
 BUTTON_WIDTH = 150
@@ -191,6 +195,21 @@ profile_rename_button.place(x=10, y=350, width=BUTTON_WIDTH, height=BUTTON_HEIGH
 
 profile_remove_button = Button(profiles_lf, text="Remove", command=None, state=DISABLED)
 profile_remove_button.place(x=10, y=380, width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+
+mapping_add_button = Button(mappings_lf, text="New", command=None, state=DISABLED)
+mapping_add_button.place(x=20, y=350, width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+
+mapping_edit_button = Button(mappings_lf, text="Edit", command=None, state=DISABLED)
+mapping_edit_button.place(x=200, y=350, width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+
+mapping_dupe_button = Button(mappings_lf, text="Duplicate", command=None, state=DISABLED)
+mapping_dupe_button.place(x=20, y=380, width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+
+mapping_remove_button = Button(mappings_lf, text="Remove", command=None, state=DISABLED)
+mapping_remove_button.place(x=200, y=380, width=BUTTON_WIDTH, height=BUTTON_HEIGHT)
+
+mapping_save_button = Button(gamepad_config_lf, text="Save Current Mappings to Flash Drive", command=None, state=NORMAL, fg='red')
+mapping_save_button.place(x=10, y=447, width=755, height=BUTTON_HEIGHT)
 
 def enable_buttons():
     copy_button.config(state=NORMAL)
