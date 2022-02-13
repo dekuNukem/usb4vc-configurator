@@ -8,6 +8,7 @@ import zipfile
 import shutil
 
 usb4vc_release_url = "https://api.github.com/repos/dekuNukem/usb4vc/releases/latest"
+usb4vc_configurator_release_url = "https://api.github.com/repos/dekuNukem/usb4vc-configurator/releases/latest"
 
 def is_internet_available():
     try:
@@ -16,6 +17,27 @@ def is_internet_available():
     except OSError:
         pass
     return False
+
+def versiontuple(v):
+    return tuple(map(int, (v.strip('v').split("."))))
+
+"""
+0 no update
+1 has update
+2+ unknown
+"""
+def get_pc_app_update_status(this_version):
+    if is_internet_available() is False:
+        return 2
+    try:
+        result_dict = json.loads(urllib.request.urlopen(usb4vc_configurator_release_url).read())
+        this_version = versiontuple(this_version)
+        remote_version = versiontuple(result_dict['tag_name'])
+        return int(remote_version > this_version)
+    except Exception as e:
+        print('get_pc_app_update_status:', e)
+        return 3
+    return 4
 
 """
 0 success

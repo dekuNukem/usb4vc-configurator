@@ -98,13 +98,26 @@ root_folder_path = ''
 flash_drive_base_path = ''
 flash_drive_config_path = ''
 
+def app_update_click(event):
+    webbrowser.open('https://github.com/dekuNukem/usb4vc-configurator/releases/latest')
+
 updates_lf = LabelFrame(root, text="Updates", width=MAIN_WINDOW_WIDTH - PADDING*2, height=60)
 updates_lf.place(x=PADDING, y=70)
 
 pc_app_update_label = Label(master=updates_lf)
 pc_app_update_label.place(x=400, y=10)
-pc_app_update_label.config(text='This app (' + str(THIS_VERSION_NUMBER) + '): Unknown', fg='black', bg=default_button_color)
-pc_app_update_label.unbind("<Button-1>")
+
+update_stats = check_update.get_pc_app_update_status(THIS_VERSION_NUMBER)
+
+if update_stats == 0:
+    pc_app_update_label.config(text=f'This app ({THIS_VERSION_NUMBER}): Up to date', fg='black', bg=default_button_color)
+    pc_app_update_label.unbind("<Button-1>")
+elif update_stats == 1:
+    pc_app_update_label.config(text=f'This app ({THIS_VERSION_NUMBER}): Update available! Click me!', fg='black', bg='orange', cursor="hand2")
+    pc_app_update_label.bind("<Button-1>", app_update_click)
+else:
+    pc_app_update_label.config(text=f'This app ({THIS_VERSION_NUMBER}): Unknown', fg='black', bg=default_button_color)
+    pc_app_update_label.unbind("<Button-1>")
 
 def update_copy_button_click():
     rcode, src_base_path = check_update.get_usb4vc_update(temp_path)
@@ -340,7 +353,7 @@ def create_mapping_window(existing_rule=None):
     if len(profile_selection) <= 0:
         return
     pboard_type = gamepad_mapping_dict_list[profile_selection[0]].get('protocol_board', "IBMPC")
-    usb_gamepad_type = gamepad_mapping_dict_list[profile_selection[0]].get('usb_gamepad_type', "Generic USB")
+    usb_gamepad_type = gamepad_mapping_dict_list[profile_selection[0]].get('usb_gamepad_type', "Xbox One Bluetooth")
 
     rule_window = Toplevel(root)
     rule_window.title("Edit rules")
@@ -485,7 +498,6 @@ def make_default_backup_dir_name():
 
 def save_mapping_to_file():
     # check if target is same as temp
-    print('----------')
     this_backup_dir = os.path.join(backup_path, make_default_backup_dir_name())
     ensure_dir(this_backup_dir)
 
