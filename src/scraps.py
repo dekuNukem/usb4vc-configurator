@@ -1,3 +1,16 @@
+    if usb_gamepad_type == "Xbox One Bluetooth":
+        for key in mapping_dict:
+            lookup_result = xbox_one_bluetooth_to_linux_ev_code_dict.get(key)
+            if lookup_result is not None:
+                translated_map_dict[lookup_result] = mapping_dict[key]
+        mapping_dict = translated_map_dict
+    elif usb_gamepad_type == "Xbox One Wired":
+        for key in mapping_dict:
+            lookup_result = xbox_one_wired_to_linux_ev_code_dict.get(key)
+            if lookup_result is not None:
+                translated_map_dict[lookup_result] = mapping_dict[key]
+        mapping_dict = translated_map_dict
+
 try:
     with open(save_filename) as json_file:
         temp = json.load(json_file)
@@ -100,3 +113,43 @@ def load_gamepad_mapping(search_path):
                     raise ValueError("not a valid config file")
     except Exception as e:
         print('load_gamepad_mapping:', e)
+
+
+
+        if source_type == 'usb_abs_axis' and target_type == 'kb_key':
+            if source_code in analog_trigger_codes:
+                pass
+            else:
+                if target_code not in curr_kb_output:
+                    curr_kb_output[target_code] = set()
+                is_activated = 0
+                deadzone_amount = 50
+                try:
+                    deadzone_amount = int(127 * target_info['deadzone_percent'] / 100)
+                except Exception:
+                    pass
+                if convert_to_8bit_midpoint127(this_gp_dict[source_code], axes_info, source_code) > 127 + deadzone_amount:
+                    is_activated = 1
+                curr_kb_output[target_code].add(is_activated)
+
+                if target_info['code_neg'] not in curr_kb_output:
+                    curr_kb_output[target_info['code_neg']] = set()
+                is_activated = 0
+                if convert_to_8bit_midpoint127(this_gp_dict[source_code], axes_info, source_code) < 127 - deadzone_amount:
+                    is_activated = 1
+                curr_kb_output[target_info['code_neg']].add(is_activated)
+
+
+        # usb gamepad analog axes to mouse axes
+        if source_type == 'usb_abs_axis' and target_type == 'usb_rel_axis' and target_code in curr_mouse_output:
+            movement = convert_to_8bit_midpoint127(this_gp_dict[source_code], axes_info, source_code) - 127
+            deadzone_amount = 20
+            try:
+                deadzone_amount = int(127 * target_info['deadzone_percent'] / 100)
+            except Exception:
+                pass
+            if abs(movement) <= deadzone_amount:
+                movement = 0
+            joystick_to_mouse_slowdown = 20
+            curr_mouse_output[target_code] = int(movement / joystick_to_mouse_slowdown)
+            curr_mouse_output['is_modified'] = True

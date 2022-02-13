@@ -184,13 +184,14 @@ def update_profile_display():
     try:
         for item in gamepad_mapping_dict_list[index]['mapping']:
             this_str = ''
-            usb_gamepad_source = item
+            usb_gamepad_source_code, usb_gamepad_source_display_name, usb_gamepad_source_type = tuple_list_search_by_codename(all_codes_list, item)
             map_dict = gamepad_mapping_dict_list[index]['mapping'][item]
-            gap1 = 15 - len(usb_gamepad_source)
-            this_str += usb_gamepad_source + ' '*gap1
+            gap1 = 15 - len(usb_gamepad_source_display_name)
+            this_str += usb_gamepad_source_display_name + ' '*gap1
             for value in list(map_dict.values()):
-                this_gap = 15 - len(value)
-                this_str += value + ' '*this_gap
+                this_code, this_display_name, this_type = tuple_list_search_by_codename(all_codes_list, value)
+                this_gap = 15 - len(this_display_name)
+                this_str += this_display_name + ' '*this_gap
             this_str += '\n'
             mapping_str_list.append(this_str)
         mappings_var.set(mapping_str_list)
@@ -299,9 +300,17 @@ ibm_15pin_gamepad_code_list = [('IBM_GGP_BTN_1', '15P Button 1', 'ibm_ggp_btn'),
     ('IBM_GGP_JS2_YP', '15P JS2 Positive Y', 'ibm_ggp_half_axis'),
     ('IBM_GGP_JS2_YN', '15P JS2 Negative Y', 'ibm_ggp_half_axis')]
 
-def tuple_list_displayname_search(tup_list, query):
+all_codes_list = generic_usb_gamepad_code_list + xbox1_code_list + kb_code_list + mouse_code_list + ibm_15pin_gamepad_code_list
+
+def tuple_list_search_by_displayname(tup_list, query):
     for item in tup_list:
         if query == item[1]:
+            return item
+    return None, None, None
+
+def tuple_list_search_by_codename(tup_list, query):
+    for item in tup_list:
+        if query == item[0]:
             return item
     return None, None, None
 
@@ -309,7 +318,7 @@ def create_mapping_window(existing_rule=None):
     def validate_dropdown_menus(event):
         map_from_selected_option = map_from_option_var.get()
         map_category_selected_option = map_to_category_option_var.get()
-        this_code, this_display_name, this_type = tuple_list_displayname_search(xbox1_code_list + generic_usb_gamepad_code_list, map_from_selected_option)
+        this_code, this_display_name, this_type = tuple_list_search_by_displayname(xbox1_code_list + generic_usb_gamepad_code_list, map_from_selected_option)
         if this_code is None:
             return
         secondary_map_to_code_dropdown.set('')
@@ -348,7 +357,7 @@ def create_mapping_window(existing_rule=None):
                 map_to_code_dropdown['values'] = [x[1] for x in mouse_code_list if x[2] == 'usb_rel_axis']
             elif map_category_selected_option == "15-Pin Gamepad":
                 map_to_code_dropdown['values'] = [x[1] for x in ibm_15pin_gamepad_code_list if x[2] == 'ibm_ggp_axis' or x[2] == 'ibm_ggp_half_axis']
-            
+
     profile_selection = profile_lstbox.curselection()
     if len(profile_selection) <= 0:
         return
@@ -401,16 +410,17 @@ def create_mapping_window(existing_rule=None):
         selection = profile_lstbox.curselection()
         if len(selection) <= 0:
             return
-        map_from_code = map_from_option_var.get()
-        map_to_code1 = map_to_code_dropdown.get()
-        map_to_code2 = secondary_map_to_code_dropdown.get()
-        if len(map_from_code) == 0 or len(map_to_code1) == 0:
+
+        map_from_code, map_from_display_name, map_from_type = tuple_list_search_by_displayname(all_codes_list, map_from_option_var.get())
+        map_to_code1, map_to_display_name1, map_to_type1 = tuple_list_search_by_displayname(all_codes_list, map_to_code_dropdown.get())
+        map_to_code2, map_to_display_name2, map_to_type2 = tuple_list_search_by_displayname(all_codes_list, secondary_map_to_code_dropdown.get())
+        if map_from_code is None:
             return
         this_map_dict = {'code':map_to_code1}
-        if len(map_to_code2) > 0:
-            this_map_dict['code_neg'] = map_to_code2
+        if map_to_code2 is not None:
+            this_map_dict['code'] = map_to_code2
+            this_map_dict['code_neg'] = map_to_code1
         gamepad_mapping_dict_list[selection[0]]['mapping'][map_from_code] = this_map_dict
-        print(gamepad_mapping_dict_list[selection[0]]['mapping'])
         close_map_window()
 
     map_save_button = Button(rule_window, text="Save This Mapping", command=save_this_mapping)
@@ -427,7 +437,7 @@ def profile_add_click():
     answer = clean_input(answer, len_limit=20)
     if len(answer) == 0:
         return
-    this_mapping = {'display_name': answer, 'device_type': 'protocol_list_gamepad', 'gamepad_type':'Xbox One Bluetooth', 'protocol_board': 'IBMPC', 'protocol_name': 'OFF', 'mapping': {}}
+    this_mapping = {'display_name': answer, 'device_type': 'protocol_list_gamepad', 'usb_gamepad_type':'Xbox One Bluetooth', 'protocol_board': 'IBMPC', 'protocol_name': 'GAMEPORT_15PIN_GAMEPAD', 'mapping': {}}
     gamepad_mapping_dict_list.append(this_mapping)
     update_profile_display()
     profile_lstbox.selection_clear(0, len(gamepad_mapping_dict_list))
@@ -602,6 +612,10 @@ def pboard_dropdown_change(event):
     if len(selection) <= 0:
         return
     gamepad_mapping_dict_list[selection[0]]['protocol_board'] = pboard_option_var.get()
+    if gamepad_mapping_dict_list[selection[0]]['protocol_board'] == 'IBMPC':
+        gamepad_mapping_dict_list[selection[0]]['protocol_name'] = 'GAMEPORT_15PIN_GAMEPAD'
+    else:
+        gamepad_mapping_dict_list[selection[0]]['protocol_name'] = 'OFF'
     update_profile_display()
 
 def usb_gamepad_dropdown_change(event):
