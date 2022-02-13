@@ -416,6 +416,8 @@ def profile_add_click():
     this_mapping = {'display_name': answer, 'device_type': 'protocol_list_gamepad', 'gamepad_type':'Generic', 'protocol_board': 'Unknown', 'protocol_name': 'OFF', 'mapping': {}}
     gamepad_mapping_dict_list.append(this_mapping)
     update_profile_display()
+    profile_lstbox.selection_clear(0, len(gamepad_mapping_dict_list))
+    profile_lstbox.selection_set(len(gamepad_mapping_dict_list)-1)
 
 def profile_remove_click():
     selection = profile_lstbox.curselection()
@@ -494,14 +496,23 @@ def save_mapping_to_file():
         except Exception as e:
             messagebox.showerror("Error", "Saving Backup Failed!\n\n"+str(e))
 
-    # for item in gamepad_mapping_dict_list:
-    #     print(filename)
-    #     print()
+    file_list = [d for d in os.listdir(flash_drive_config_path) if d.startswith("usb4vc_map") and d.lower().endswith(".json")]
+    for item in file_list:
+        try:
+            os.remove(os.path.join(flash_drive_config_path, item))
+        except Exception:
+            continue
+        time.sleep(0.05)
 
-    # print(this_backup_dir)
-    # print("delete all mapping in here:", flash_drive_config_path)
-
-
+    for item in gamepad_mapping_dict_list:
+        filename = clean_input(f'usb4vc_map_{item["display_name"]}_{item["protocol_board"]}.json', clean_filename=True).lower()
+        save_dest = os.path.join(flash_drive_config_path, filename)
+        try:
+            print('writing:', save_dest)
+            with open(save_dest, 'w', encoding='utf-8') as save_file:
+                save_file.write(json.dumps(item, sort_keys=True))
+        except Exception as e:
+            messagebox.showerror("Error", "Saving to Flash Drive Failed!\n\n"+str(e))
 
 BUTTON_WIDTH = 150
 BUTTON_HEIGHT = 25
