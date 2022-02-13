@@ -153,3 +153,6 @@ def load_gamepad_mapping(search_path):
             joystick_to_mouse_slowdown = 20
             curr_mouse_output[target_code] = int(movement / joystick_to_mouse_slowdown)
             curr_mouse_output['is_modified'] = True
+['axes_info']
+
+    usb_gamepad_type = mapping_info.get('usb_gamepad_type', 'Generic USB')

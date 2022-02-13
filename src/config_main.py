@@ -179,7 +179,7 @@ def update_profile_display():
     mapping_remove_button.config(state=NORMAL)
     print(gamepad_mapping_dict_list[index])
     pboard_option_var.set(str(gamepad_mapping_dict_list[index].get('protocol_board', "IBMPC")))
-    usb_gamepad_option_var.set(str(gamepad_mapping_dict_list[index].get('usb_gamepad_type', "Xbox One Bluetooth")))
+    usb_gamepad_option_var.set(str(gamepad_mapping_dict_list[index].get('usb_gamepad_type', "Xbox One")))
     mapping_str_list = []
     try:
         for item in gamepad_mapping_dict_list[index]['mapping']:
@@ -362,7 +362,7 @@ def create_mapping_window(existing_rule=None):
     if len(profile_selection) <= 0:
         return
     pboard_type = gamepad_mapping_dict_list[profile_selection[0]].get('protocol_board', "IBMPC")
-    usb_gamepad_type = gamepad_mapping_dict_list[profile_selection[0]].get('usb_gamepad_type', "Xbox One Bluetooth")
+    usb_gamepad_type = gamepad_mapping_dict_list[profile_selection[0]].get('usb_gamepad_type', "Xbox One")
 
     rule_window = Toplevel(root)
     rule_window.title("Edit rules")
@@ -437,7 +437,7 @@ def profile_add_click():
     answer = clean_input(answer, len_limit=20)
     if len(answer) == 0:
         return
-    this_mapping = {'display_name': answer, 'device_type': 'protocol_list_gamepad', 'usb_gamepad_type':'Xbox One Bluetooth', 'protocol_board': 'IBMPC', 'protocol_name': 'GAMEPORT_15PIN_GAMEPAD', 'mapping': {}}
+    this_mapping = {'display_name': answer, 'device_type': 'protocol_list_gamepad', 'usb_gamepad_type':'Xbox One', 'protocol_board': 'IBMPC', 'protocol_name': 'GAMEPORT_15PIN_GAMEPAD', 'mapping': {}}
     gamepad_mapping_dict_list.append(this_mapping)
     update_profile_display()
     profile_lstbox.selection_clear(0, len(gamepad_mapping_dict_list))
@@ -636,9 +636,9 @@ pboard_dropdown.config(state=DISABLED)
 
 usb_gamepad_type_dropdown_label = Label(master=options_lf, text="USB Gamepad:")
 usb_gamepad_type_dropdown_label.place(x=10, y=80)
-usb_gamepad_list = ['Generic USB', 'Xbox One Wired', "Xbox One Bluetooth"]
+usb_gamepad_list = ['Generic USB', 'Xbox One']
 usb_gamepad_option_var = StringVar()
-usb_gamepad_option_var.set(usb_gamepad_list[0])
+usb_gamepad_option_var.set(usb_gamepad_list[1])
 usb_gamepad_dropdown = OptionMenu(options_lf, usb_gamepad_option_var, command=usb_gamepad_dropdown_change, *usb_gamepad_list)
 usb_gamepad_dropdown.place(x=10, y=100, width=150)
 usb_gamepad_dropdown.config(state=DISABLED)
