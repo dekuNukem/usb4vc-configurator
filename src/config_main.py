@@ -27,6 +27,7 @@ if 'linux' in sys.platform:
 def ensure_dir(dir_path):
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
+        time.sleep(0.05)
 
 appname = 'usb4vc_config'
 appauthor = 'dekuNukem'
@@ -131,7 +132,7 @@ def update_copy_button_click():
         shutil.copytree(src_rpi_app_path, dest_rpi_app_path)
     except Exception as e:
         messagebox.showerror("Error", "File Copy Failed: \n\n"+str(e))
-    messagebox.showinfo("Update", "Done!")
+    messagebox.showinfo("Update", "Success!")
 
 copy_button = Button(updates_lf, text="Copy Latest USB4VC Updates to Flash Drive", command=update_copy_button_click, state=DISABLED)
 copy_button.place(x=10, y=5, width=300)
@@ -399,7 +400,7 @@ def create_mapping_window(existing_rule=None):
         print(gamepad_mapping_dict_list[selection[0]]['mapping'])
         close_map_window()
 
-    map_save_button = Button(rule_window, text="Save This Mapping", command=save_this_mapping, fg='red')
+    map_save_button = Button(rule_window, text="Save This Mapping", command=save_this_mapping)
     map_save_button.place(x=10, y=140, width=380, height=25)
     validate_dropdown_menus(None)
 
@@ -496,6 +497,7 @@ def save_mapping_to_file():
         except Exception as e:
             messagebox.showerror("Error", "Saving Backup Failed!\n\n"+str(e))
 
+    ensure_dir(flash_drive_config_path)
     file_list = [d for d in os.listdir(flash_drive_config_path) if d.startswith("usb4vc_map") and d.lower().endswith(".json")]
     for item in file_list:
         try:
@@ -508,11 +510,13 @@ def save_mapping_to_file():
         filename = clean_input(f'usb4vc_map_{item["display_name"]}_{item["protocol_board"]}.json', clean_filename=True).lower()
         save_dest = os.path.join(flash_drive_config_path, filename)
         try:
-            print('writing:', save_dest)
+            print('writing:', save_dest, item)
             with open(save_dest, 'w', encoding='utf-8') as save_file:
                 save_file.write(json.dumps(item, sort_keys=True))
         except Exception as e:
             messagebox.showerror("Error", "Saving to Flash Drive Failed!\n\n"+str(e))
+            return
+    messagebox.showinfo("Save", "Success!")
 
 BUTTON_WIDTH = 150
 BUTTON_HEIGHT = 25

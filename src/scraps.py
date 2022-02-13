@@ -85,3 +85,18 @@ def save_mapping_to_file():
 
 # temp_path = "C:\\Users\\allen\\AppData\\Roaming\\dekuNukem\\usb4vc_config\\temp"
 # print(get_usb4vc_update(temp_path))
+
+def load_gamepad_mapping(search_path):
+    try:
+        gamepad_mapping_dict_list.clear()
+        file_list = [d for d in os.listdir(search_path) if d.startswith("usb4vc_map") and d.lower().endswith(".json")]
+        for item in file_list:
+            full_file_name = os.path.join(search_path, item)
+            with open(full_file_name) as json_file:
+                temp = json.load(json_file)
+                if isinstance(temp, dict) and 'display_name' in temp:
+                    gamepad_mapping_dict_list.append(temp)
+                else:
+                    raise ValueError("not a valid config file")
+    except Exception as e:
+        print('load_gamepad_mapping:', e)
