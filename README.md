@@ -34,9 +34,6 @@ For macOS, **`RIGHT CLICK`** on the app and select `Open`. You might have to do 
 
 ![Alt text](resources/macos_warning.png)
 
-
-
-
 ## Using the App
 
 ### Select flash drive
@@ -103,7 +100,9 @@ After creating your mappings, press `Write Current Mappings to Flash Drive` butt
 
 Eject the flash drive, and plug it in the USB4VC.
 
-Select "Update via USB Flashdrive" to start updating. It will
+## Apply Updates on USB4VC
+
+Select "Update via USB Flashdrive" in the main menu. It will:
 
 * Copy over latest software updates
 
@@ -115,7 +114,7 @@ Select "Update via USB Flashdrive" to start updating. It will
 
 ![Alt text](resources/rpiupdate.jpeg)
 
-The new profiles should appear in the `Gamepad Protocol` menu, use `enter` button to cycle through.
+The new profiles should appear in the `Gamepad Protocol` setting, use `enter` button to cycle through.
 
 ![Alt text](resources/descent.jpeg)
 
