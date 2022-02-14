@@ -410,7 +410,6 @@ def create_mapping_window(existing_rule=None):
         selection = profile_lstbox.curselection()
         if len(selection) <= 0:
             return
-
         map_from_code, map_from_display_name, map_from_type = tuple_list_search_by_displayname(all_codes_list, map_from_option_var.get())
         map_to_code1, map_to_display_name1, map_to_type1 = tuple_list_search_by_displayname(all_codes_list, map_to_code_dropdown.get())
         map_to_code2, map_to_display_name2, map_to_type2 = tuple_list_search_by_displayname(all_codes_list, secondary_map_to_code_dropdown.get())
@@ -421,13 +420,13 @@ def create_mapping_window(existing_rule=None):
             this_map_dict['code'] = map_to_code2
             this_map_dict['code_neg'] = map_to_code1
         gamepad_mapping_dict_list[selection[0]]['mapping'][map_from_code] = this_map_dict
-        close_map_window()
+        update_profile_display()
 
-    map_save_button = Button(rule_window, text="Save This Mapping", command=save_this_mapping)
+    map_save_button = Button(rule_window, text="Add This Mapping", command=save_this_mapping)
     map_save_button.place(x=10, y=140, width=380, height=25)
     validate_dropdown_menus(None)
 
-    map_cancel_button = Button(rule_window, text="Cancel", command=close_map_window)
+    map_cancel_button = Button(rule_window, text="Exit", command=close_map_window)
     map_cancel_button.place(x=10, y=175, width=380, height=25)
 
 def profile_add_click():
