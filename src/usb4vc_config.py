@@ -269,8 +269,8 @@ xbox1_code_list = [("XB1_A", "A Button", "usb_gp_btn"),
     ("XB1_DPX", "D-pad X", "usb_abs_axis"),
     ("XB1_DPY", "D-pad Y", "usb_abs_axis")]
 
-ps5_code_list = [("PS5_CROSS","X Button","usb_gp_btn"),
-    ("PS5_CIRCLE","O Button","usb_gp_btn"),
+ps5_code_list = [("PS5_CROSS","Cross Button","usb_gp_btn"),
+    ("PS5_CIRCLE","Circle Button","usb_gp_btn"),
     ("PS5_SQUARE","Square Button","usb_gp_btn"),
     ("PS5_TRIANGLE","Triangle Button","usb_gp_btn"),
     ("PS5_L1","L1 Button","usb_gp_btn"),
@@ -282,16 +282,16 @@ ps5_code_list = [("PS5_CROSS","X Button","usb_gp_btn"),
     ("PS5_LOGO","PS Logo Button","usb_gp_btn"),
     ("PS5_MUTE","Mute Button","usb_gp_btn"),
     ("PS5_TOUCHPAD_BUTTON","Touchpad Button","usb_gp_btn"),
-    ("PS5_LSB","L-Stick Button","usb_gp_btn"),
-    ("PS5_RSB","R-Stick Button","usb_gp_btn"),
-    ("PS5_LSX","L-Stick X","usb_abs_axis"),
-    ("PS5_LSY","L-Stick Y","usb_abs_axis"),
-    ("PS5_RSX","R-Stick X","usb_abs_axis"),
-    ("PS5_RSY","R-Stick Y","usb_abs_axis"),
+    ("PS5_LSB","PS L-Stick Button","usb_gp_btn"),
+    ("PS5_RSB","PS R-Stick Button","usb_gp_btn"),
+    ("PS5_LSX","PS L-Stick X","usb_abs_axis"),
+    ("PS5_LSY","PS L-Stick Y","usb_abs_axis"),
+    ("PS5_RSX","PS R-Stick X","usb_abs_axis"),
+    ("PS5_RSY","PS R-Stick Y","usb_abs_axis"),
     ("PS5_L2_ANALOG","L2 Analog","usb_abs_axis"),
     ("PS5_R2_ANALOG","R2 Analog","usb_abs_axis"),
-    ("PS5_DPX","D-pad X","usb_abs_axis"),
-    ("PS5_DPY","D-pad Y","usb_abs_axis")]
+    ("PS5_DPX","PS D-pad X","usb_abs_axis"),
+    ("PS5_DPY","PS D-pad Y","usb_abs_axis")]
 
 # code, display name, type
 kb_code_list = [("KEY_1", "KEY_1", "kb_key"), ("KEY_2", "KEY_2", "kb_key"), ("KEY_3", "KEY_3", "kb_key"), ("KEY_4", "KEY_4", "kb_key"), ("KEY_5", "KEY_5", "kb_key"), ("KEY_6", "KEY_6", "kb_key"), ("KEY_7", "KEY_7", "kb_key"), ("KEY_8", "KEY_8", "kb_key"), ("KEY_9", "KEY_9", "kb_key"), ("KEY_0", "KEY_0", "kb_key"), ("KEY_A", "KEY_A", "kb_key"), ("KEY_B", "KEY_B", "kb_key"), ("KEY_C", "KEY_C", "kb_key"), ("KEY_D", "KEY_D", "kb_key"), ("KEY_E", "KEY_E", "kb_key"), ("KEY_F", "KEY_F", "kb_key"), ("KEY_G", "KEY_G", "kb_key"), ("KEY_H", "KEY_H", "kb_key"), ("KEY_I", "KEY_I", "kb_key"), ("KEY_J", "KEY_J", "kb_key"), ("KEY_K", "KEY_K", "kb_key"), ("KEY_L", "KEY_L", "kb_key"), ("KEY_M", "KEY_M", "kb_key"), ("KEY_N", "KEY_N", "kb_key"), ("KEY_O", "KEY_O", "kb_key"), ("KEY_P", "KEY_P", "kb_key"), ("KEY_Q", "KEY_Q", "kb_key"), ("KEY_R", "KEY_R", "kb_key"), ("KEY_S", "KEY_S", "kb_key"), ("KEY_T", "KEY_T", "kb_key"), ("KEY_U", "KEY_U", "kb_key"), ("KEY_V", "KEY_V", "kb_key"), ("KEY_W", "KEY_W", "kb_key"), ("KEY_X", "KEY_X", "kb_key"), ("KEY_Y", "KEY_Y", "kb_key"), ("KEY_Z", "KEY_Z", "kb_key"), ("KEY_SPACE", "KEY_SPACE", "kb_key"), ("KEY_UP", "KEY_UP", "kb_key"), ("KEY_DOWN", "KEY_DOWN", "kb_key"), ("KEY_LEFT", "KEY_LEFT", "kb_key"), ("KEY_RIGHT", "KEY_RIGHT", "kb_key"), ("KEY_ESC", "KEY_ESC", "kb_key"), ("KEY_TAB", "KEY_TAB", "kb_key"), ("KEY_ENTER", "KEY_ENTER", "kb_key"), ("KEY_END", "KEY_END", "kb_key"), ("KEY_HOME", "KEY_HOME", "kb_key"), ("KEY_LEFTALT", "KEY_LEFTALT", "kb_key"), ("KEY_LEFTCTRL", "KEY_LEFTCTRL", "kb_key"), ("KEY_LEFTSHIFT", "KEY_LEFTSHIFT", "kb_key"), ("KEY_RIGHTALT", "KEY_RIGHTALT", "kb_key"), ("KEY_RIGHTCTRL", "KEY_RIGHTCTRL", "kb_key"), ("KEY_RIGHTSHIFT", "KEY_RIGHTSHIFT", "kb_key"), ("KEY_SCROLLLOCK", "KEY_SCROLLLOCK", "kb_key"), ("KEY_SYSRQ", "KEY_SYSRQ", "kb_key"), ("KEY_PAGEUP", "KEY_PAGEUP", "kb_key"), ("KEY_PAGEDOWN", "KEY_PAGEDOWN", "kb_key"), ("KEY_INSERT", "KEY_INSERT", "kb_key"), ("KEY_DELETE", "KEY_DELETE", "kb_key"), ("KEY_102ND", "KEY_102ND", "kb_key"), ("KEY_CAPSLOCK", "KEY_CAPSLOCK", "kb_key"), ("KEY_NUMLOCK", "KEY_NUMLOCK", "kb_key"), ("KEY_MINUS", "KEY_MINUS", "kb_key"), ("KEY_EQUAL", "KEY_EQUAL", "kb_key"), ("KEY_BACKSPACE", "KEY_BACKSPACE", "kb_key"), ("KEY_LEFTBRACE", "KEY_LEFTBRACE", "kb_key"), ("KEY_RIGHTBRACE", "KEY_RIGHTBRACE", "kb_key"), ("KEY_SEMICOLON", "KEY_SEMICOLON", "kb_key"), ("KEY_APOSTROPHE", "KEY_APOSTROPHE", "kb_key"), ("KEY_GRAVE", "KEY_GRAVE", "kb_key"), ("KEY_BACKSLASH", "KEY_BACKSLASH", "kb_key"), ("KEY_COMMA", "KEY_COMMA", "kb_key"), ("KEY_DOT", "KEY_DOT", "kb_key"), ("KEY_SLASH", "KEY_SLASH", "kb_key"), ("KEY_F1", "KEY_F1", "kb_key"), ("KEY_F2", "KEY_F2", "kb_key"), ("KEY_F3", "KEY_F3", "kb_key"), ("KEY_F4", "KEY_F4", "kb_key"), ("KEY_F5", "KEY_F5", "kb_key"), ("KEY_F6", "KEY_F6", "kb_key"), ("KEY_F7", "KEY_F7", "kb_key"), ("KEY_F8", "KEY_F8", "kb_key"), ("KEY_F9", "KEY_F9", "kb_key"), ("KEY_F10", "KEY_F10", "kb_key"), ("KEY_F11", "KEY_F11", "kb_key"), ("KEY_F12", "KEY_F12", "kb_key"), ("KEY_F13", "KEY_F13", "kb_key"), ("KEY_F14", "KEY_F14", "kb_key"), ("KEY_F15", "KEY_F15", "kb_key"), ("KEY_F16", "KEY_F16", "kb_key"), ("KEY_F17", "KEY_F17", "kb_key"), ("KEY_F18", "KEY_F18", "kb_key"), ("KEY_F19", "KEY_F19", "kb_key"), ("KEY_F20", "KEY_F20", "kb_key"), ("KEY_F21", "KEY_F21", "kb_key"), ("KEY_F22", "KEY_F22", "kb_key"), ("KEY_F23", "KEY_F23", "kb_key"), ("KEY_F24", "KEY_F24", "kb_key"), ("KEY_KP0", "KEY_KP0", "kb_key"), ("KEY_KP1", "KEY_KP1", "kb_key"), ("KEY_KP2", "KEY_KP2", "kb_key"), ("KEY_KP3", "KEY_KP3", "kb_key"), ("KEY_KP4", "KEY_KP4", "kb_key"), ("KEY_KP5", "KEY_KP5", "kb_key"), ("KEY_KP6", "KEY_KP6", "kb_key"), ("KEY_KP7", "KEY_KP7", "kb_key"), ("KEY_KP8", "KEY_KP8", "kb_key"), ("KEY_KP9", "KEY_KP9", "kb_key"), ("KEY_KPASTERISK", "KEY_KPASTERISK", "kb_key"), ("KEY_KPDOT", "KEY_KPDOT", "kb_key"), ("KEY_KPENTER", "KEY_KPENTER", "kb_key"), ("KEY_KPMINUS", "KEY_KPMINUS", "kb_key"), ("KEY_KPPLUS", "KEY_KPPLUS", "kb_key"), ("KEY_KPSLASH", "KEY_KPSLASH", "kb_key")]
