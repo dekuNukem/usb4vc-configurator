@@ -141,8 +141,8 @@ def update_copy_button_click():
     try:
         src_firmware_path = os.path.join(src_base_path, 'firmware')
         src_rpi_app_path = os.path.join(src_base_path, 'rpi_app')
-        shutil.copytree(src_firmware_path, dest_firmware_path)
         shutil.copytree(src_rpi_app_path, dest_rpi_app_path)
+        shutil.copytree(src_firmware_path, dest_firmware_path)
     except Exception as e:
         messagebox.showerror("Error", "File Copy Failed: \n\n"+str(e))
     messagebox.showinfo("Update", "Success!")
