@@ -16,7 +16,7 @@ import copy
 
 THIS_VERSION_NUMBER = '0.0.4'
 MAIN_WINDOW_WIDTH = 800
-MAIN_WINDOW_HEIGHT = 670
+MAIN_WINDOW_HEIGHT = 680
 PADDING = 10
 HEIGHT_CONNECT_LF = 60
 
@@ -162,8 +162,8 @@ options_lf.place(x=200, y=5)
 mappings_lf = LabelFrame(gamepad_config_lf, text="Mappings", width=375, height=435)
 mappings_lf.place(x=390, y=5)
 
-save_lf = LabelFrame(root, text="Save", width=MAIN_WINDOW_WIDTH - PADDING*2, height=50)
-save_lf.place(x=PADDING, y=610)
+save_lf = LabelFrame(root, text="Save", width=MAIN_WINDOW_WIDTH - PADDING*2, height=60)
+save_lf.place(x=PADDING, y=615)
 
 gamepad_mapping_dict_list = []
 profile_var = StringVar()
@@ -380,22 +380,22 @@ mouse_code_list = [("BTN_LEFT", "Mouse Left", "mouse_btn"),
     ("REL_Z", "Mouse Scroll", "usb_rel_axis")]
 
 # code, display name, type
-ibm_15pin_gamepad_code_list = [('IBM_GGP_BTN_1', '15P Button 1', 'ibm_ggp_btn'),
-    ('IBM_GGP_BTN_2', '15P Button 2', 'ibm_ggp_btn'),
-    ('IBM_GGP_BTN_3', '15P Button 3', 'ibm_ggp_btn'),
-    ('IBM_GGP_BTN_4', '15P Button 4', 'ibm_ggp_btn'),
-    ('IBM_GGP_JS1_X', '15P JS1 X-Axis', 'ibm_ggp_axis'),
-    ('IBM_GGP_JS1_Y', '15P JS1 Y-Axis', 'ibm_ggp_axis'),
-    ('IBM_GGP_JS2_X', '15P JS2 X-Axis', 'ibm_ggp_axis'),
-    ('IBM_GGP_JS2_Y', '15P JS2 Y-Axis', 'ibm_ggp_axis'),
-    ('IBM_GGP_JS1_XP', '15P JS1 Positive X', 'ibm_ggp_half_axis'),
-    ('IBM_GGP_JS1_XN', '15P JS1 Negative X', 'ibm_ggp_half_axis'),
-    ('IBM_GGP_JS1_YP', '15P JS1 Positive Y', 'ibm_ggp_half_axis'),
-    ('IBM_GGP_JS1_YN', '15P JS1 Negative Y', 'ibm_ggp_half_axis'),
-    ('IBM_GGP_JS2_XP', '15P JS2 Positive X', 'ibm_ggp_half_axis'),
-    ('IBM_GGP_JS2_XN', '15P JS2 Negative X', 'ibm_ggp_half_axis'),
-    ('IBM_GGP_JS2_YP', '15P JS2 Positive Y', 'ibm_ggp_half_axis'),
-    ('IBM_GGP_JS2_YN', '15P JS2 Negative Y', 'ibm_ggp_half_axis')]
+ibm_15pin_gamepad_code_list = [('IBM_GGP_BTN_1', 'Button 1', 'ibm_ggp_btn'),
+    ('IBM_GGP_BTN_2', 'Button 2', 'ibm_ggp_btn'),
+    ('IBM_GGP_BTN_3', 'Button 3', 'ibm_ggp_btn'),
+    ('IBM_GGP_BTN_4', 'Button 4', 'ibm_ggp_btn'),
+    ('IBM_GGP_JS1_X', 'JS1 X-Axis', 'ibm_ggp_axis'),
+    ('IBM_GGP_JS1_Y', 'JS1 Y-Axis', 'ibm_ggp_axis'),
+    ('IBM_GGP_JS2_X', 'JS2 X-Axis', 'ibm_ggp_axis'),
+    ('IBM_GGP_JS2_Y', 'JS2 Y-Axis', 'ibm_ggp_axis'),
+    ('IBM_GGP_JS1_XP', 'JS1 Positive X', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS1_XN', 'JS1 Negative X', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS1_YP', 'JS1 Positive Y', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS1_YN', 'JS1 Negative Y', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS2_XP', 'JS2 Positive X', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS2_XN', 'JS2 Negative X', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS2_YP', 'JS2 Positive Y', 'ibm_ggp_half_axis'),
+    ('IBM_GGP_JS2_YN', 'JS2 Negative Y', 'ibm_ggp_half_axis')]
 
 all_codes_list = generic_usb_gamepad_code_list + xbox_code_list + ps_code_list + kb_code_list + mouse_code_list + ibm_15pin_gamepad_code_list
 
@@ -680,8 +680,8 @@ mapping_add_button.place(x=20, y=350, width=330, height=BUTTON_HEIGHT)
 mapping_remove_button = Button(mappings_lf, text="Remove", command=mapping_remove_click, state=DISABLED)
 mapping_remove_button.place(x=20, y=380, width=330, height=BUTTON_HEIGHT)
 
-mapping_save_button = Button(save_lf, text="Write Settings to Flash Drive", command=save_mapping_to_file, state=DISABLED, fg='red')
-mapping_save_button.place(x=250, y=0, width=500, height=BUTTON_HEIGHT)
+mapping_save_button = Button(save_lf, text="Save Settings to Flash Drive", command=save_mapping_to_file, state=DISABLED, fg='#B52E1F')
+mapping_save_button.place(x=250, y=5, width=500, height=BUTTON_HEIGHT)
 
 def wifi_click():
     wifi_name = simpledialog.askstring(title="WiFi", prompt="WiFi Name?")
@@ -690,9 +690,26 @@ def wifi_click():
     wifi_password = simpledialog.askstring(title="WiFi", prompt="WiFi Password?")
     if wifi_password is None or len(wifi_password) == 0:
         return
+    wifi_dict = {'wifi_name': wifi_name, 'wifi_password':wifi_password}
+    ensure_dir(flash_drive_config_path)
 
-wifi_button = Button(save_lf, text="Add WiFi Password", command=wifi_click, state=NORMAL)
-wifi_button.place(x=10, y=0, width=200, height=BUTTON_HEIGHT)
+    wifi_file_path = os.path.join(flash_drive_config_path, 'wifi_info.txt')
+    try:
+        os.remove(wifi_file_path)
+    except Exception:
+        pass
+    time.sleep(0.05)
+
+    try:
+        with open(wifi_file_path, 'w', encoding='utf-8') as save_file:
+            save_file.write(json.dumps(wifi_dict, sort_keys=True))
+    except Exception as e:
+        messagebox.showerror("Error", "Saving WiFi info Failed!\n\n"+str(e))
+        return
+    messagebox.showinfo("Save", "Success!")
+
+wifi_button = Button(save_lf, text="Add WiFi Password", command=wifi_click, state=DISABLED)
+wifi_button.place(x=10, y=5, width=200, height=BUTTON_HEIGHT)
 
 def enable_profile_buttons():
     copy_button.config(state=NORMAL)
@@ -701,6 +718,7 @@ def enable_profile_buttons():
     profile_rename_button.config(state=NORMAL)
     profile_dupe_button.config(state=NORMAL)
     mapping_save_button.config(state=NORMAL)
+    wifi_button.config(state=NORMAL)
 
 def select_root_folder(root_path=None):
     global root_folder_path
@@ -772,7 +790,7 @@ usb_gamepad_dropdown = OptionMenu(options_lf, usb_gamepad_option_var, command=us
 usb_gamepad_dropdown.place(x=10, y=100, width=150)
 usb_gamepad_dropdown.config(state=DISABLED)
 
-select_root_folder('C:/Users/allen/Desktop/flashdrive_test')
+# select_root_folder('C:/Users/allen/Desktop/flashdrive_test')
 
 root.update()
 root.mainloop()
