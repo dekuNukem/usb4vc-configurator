@@ -16,7 +16,7 @@ import copy
 
 THIS_VERSION_NUMBER = '0.0.4'
 MAIN_WINDOW_WIDTH = 800
-MAIN_WINDOW_HEIGHT = 650
+MAIN_WINDOW_HEIGHT = 670
 PADDING = 10
 HEIGHT_CONNECT_LF = 60
 
@@ -150,7 +150,7 @@ def update_copy_button_click():
 copy_button = Button(updates_lf, text="Copy Latest USB4VC Updates to Flash Drive", command=update_copy_button_click, state=DISABLED)
 copy_button.place(x=10, y=5, width=300)
 
-gamepad_config_lf = LabelFrame(root, text="Custom Gamepad Mappings", width=MAIN_WINDOW_WIDTH - PADDING*2, height=500)
+gamepad_config_lf = LabelFrame(root, text="Custom Gamepad Mappings", width=MAIN_WINDOW_WIDTH - PADDING*2, height=470)
 gamepad_config_lf.place(x=PADDING, y=140)
 
 profiles_lf = LabelFrame(gamepad_config_lf, text="Profiles", width=180, height=435)
@@ -161,6 +161,9 @@ options_lf.place(x=200, y=5)
 
 mappings_lf = LabelFrame(gamepad_config_lf, text="Mappings", width=375, height=435)
 mappings_lf.place(x=390, y=5)
+
+save_lf = LabelFrame(root, text="Save", width=MAIN_WINDOW_WIDTH - PADDING*2, height=50)
+save_lf.place(x=PADDING, y=610)
 
 gamepad_mapping_dict_list = []
 profile_var = StringVar()
@@ -677,8 +680,19 @@ mapping_add_button.place(x=20, y=350, width=330, height=BUTTON_HEIGHT)
 mapping_remove_button = Button(mappings_lf, text="Remove", command=mapping_remove_click, state=DISABLED)
 mapping_remove_button.place(x=20, y=380, width=330, height=BUTTON_HEIGHT)
 
-mapping_save_button = Button(gamepad_config_lf, text="Write Current Mappings to Flash Drive", command=save_mapping_to_file, state=DISABLED, fg='red')
-mapping_save_button.place(x=10, y=447, width=755, height=BUTTON_HEIGHT)
+mapping_save_button = Button(save_lf, text="Write Settings to Flash Drive", command=save_mapping_to_file, state=DISABLED, fg='red')
+mapping_save_button.place(x=250, y=0, width=500, height=BUTTON_HEIGHT)
+
+def wifi_click():
+    wifi_name = simpledialog.askstring(title="WiFi", prompt="WiFi Name?")
+    if wifi_name is None or len(wifi_name) == 0:
+        return
+    wifi_password = simpledialog.askstring(title="WiFi", prompt="WiFi Password?")
+    if wifi_password is None or len(wifi_password) == 0:
+        return
+
+wifi_button = Button(save_lf, text="Add WiFi Password", command=wifi_click, state=NORMAL)
+wifi_button.place(x=10, y=0, width=200, height=BUTTON_HEIGHT)
 
 def enable_profile_buttons():
     copy_button.config(state=NORMAL)
@@ -751,7 +765,7 @@ pboard_dropdown.config(state=DISABLED)
 
 usb_gamepad_type_dropdown_label = Label(master=options_lf, text="Gamepad Type:")
 usb_gamepad_type_dropdown_label.place(x=10, y=80)
-usb_gamepad_list = ['Xbox', 'PlayStation', 'Generic USB']
+usb_gamepad_list = ['Generic USB', 'Xbox', 'PlayStation']
 usb_gamepad_option_var = StringVar()
 usb_gamepad_option_var.set(usb_gamepad_list[1])
 usb_gamepad_dropdown = OptionMenu(options_lf, usb_gamepad_option_var, command=usb_gamepad_dropdown_change, *usb_gamepad_list)
