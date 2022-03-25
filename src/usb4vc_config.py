@@ -690,7 +690,7 @@ def wifi_click():
     wifi_password = simpledialog.askstring(title="WiFi", prompt="WiFi Password? (Leave blank for none)")
     if wifi_password is None:
         return
-    wifi_country_code = simpledialog.askstring(title="WiFi", prompt="WiFi Country Code? (try searching this on Google)")
+    wifi_country_code = simpledialog.askstring(title="WiFi", prompt="WiFi Country Code? (Search on Google if unsure)")
     if wifi_country_code is None or len(wifi_country_code) == 0:
         return
     wifi_dict = {'wifi_name': wifi_name, 'wifi_password':wifi_password, 'wifi_country_code':wifi_country_code.upper()}
