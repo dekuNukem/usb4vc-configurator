@@ -687,13 +687,16 @@ def wifi_click():
     wifi_name = simpledialog.askstring(title="WiFi", prompt="WiFi Name?")
     if wifi_name is None or len(wifi_name) == 0:
         return
-    wifi_password = simpledialog.askstring(title="WiFi", prompt="WiFi Password?")
-    if wifi_password is None or len(wifi_password) == 0:
+    wifi_password = simpledialog.askstring(title="WiFi", prompt="WiFi Password? (Leave blank for none)")
+    if wifi_password is None:
         return
-    wifi_dict = {'wifi_name': wifi_name, 'wifi_password':wifi_password}
+    wifi_country_code = simpledialog.askstring(title="WiFi", prompt="WiFi Country Code? (try searching this on Google)")
+    if wifi_country_code is None or len(wifi_country_code) == 0:
+        return
+    wifi_dict = {'wifi_name': wifi_name, 'wifi_password':wifi_password, 'wifi_country_code':wifi_country_code.upper()}
     ensure_dir(flash_drive_config_path)
 
-    wifi_file_path = os.path.join(flash_drive_config_path, 'wifi_info.txt')
+    wifi_file_path = os.path.join(flash_drive_config_path, 'wifi_info.json')
     try:
         os.remove(wifi_file_path)
     except Exception:
