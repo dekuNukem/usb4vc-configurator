@@ -14,7 +14,7 @@ import json
 import shutil
 import copy
 
-THIS_VERSION_NUMBER = '0.0.3'
+THIS_VERSION_NUMBER = '0.0.4'
 MAIN_WINDOW_WIDTH = 800
 MAIN_WINDOW_HEIGHT = 650
 PADDING = 10
@@ -246,52 +246,122 @@ generic_usb_gamepad_code_list = [("BTN_GAMEPAD", "BTN_GAMEPAD", "usb_gp_btn"),
     ("ABS_HAT2X", "ABS_HAT2X", "usb_abs_axis"),
     ("ABS_HAT2Y", "ABS_HAT2Y", "usb_abs_axis"),
     ("ABS_HAT3X", "ABS_HAT3X", "usb_abs_axis"),
-    ("ABS_HAT3Y", "ABS_HAT3Y", "usb_abs_axis")]
+    ("ABS_HAT3Y", "ABS_HAT3Y", "usb_abs_axis"),
+
+    ("BTN_MISC", "BTN_MISC", "usb_gp_btn"),
+    ("BTN_0", "BTN_0", "usb_gp_btn"),
+    ("BTN_1", "BTN_1", "usb_gp_btn"),
+    ("BTN_2", "BTN_2", "usb_gp_btn"),
+    ("BTN_3", "BTN_3", "usb_gp_btn"),
+    ("BTN_4", "BTN_4", "usb_gp_btn"),
+    ("BTN_5", "BTN_5", "usb_gp_btn"),
+    ("BTN_6", "BTN_6", "usb_gp_btn"),
+    ("BTN_7", "BTN_7", "usb_gp_btn"),
+    ("BTN_8", "BTN_8", "usb_gp_btn"),
+    ("BTN_9", "BTN_9", "usb_gp_btn"),
+
+    ("BTN_JOYSTICK", "BTN_JOYSTICK", "usb_gp_btn"),
+    ("BTN_TRIGGER", "BTN_TRIGGER", "usb_gp_btn"),
+    ("BTN_THUMB", "BTN_THUMB", "usb_gp_btn"),
+    ("BTN_THUMB2", "BTN_THUMB2", "usb_gp_btn"),
+    ("BTN_TOP", "BTN_TOP", "usb_gp_btn"),
+    ("BTN_TOP2", "BTN_TOP2", "usb_gp_btn"),
+    ("BTN_PINKIE", "BTN_PINKIE", "usb_gp_btn"),
+    ("BTN_BASE", "BTN_BASE", "usb_gp_btn"),
+    ("BTN_BASE2", "BTN_BASE2", "usb_gp_btn"),
+    ("BTN_BASE3", "BTN_BASE3", "usb_gp_btn"),
+    ("BTN_BASE4", "BTN_BASE4", "usb_gp_btn"),
+    ("BTN_BASE5", "BTN_BASE5", "usb_gp_btn"),
+    ("BTN_BASE6", "BTN_BASE6", "usb_gp_btn"),
+    ("BTN_DEAD", "BTN_DEAD", "usb_gp_btn"),
+
+    ("BTN_TRIGGER_HAPPY", "BTN_TRIGGER_HAPPY", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY1", "BTN_TRIGGER_HAPPY1", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY2", "BTN_TRIGGER_HAPPY2", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY3", "BTN_TRIGGER_HAPPY3", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY4", "BTN_TRIGGER_HAPPY4", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY5", "BTN_TRIGGER_HAPPY5", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY6", "BTN_TRIGGER_HAPPY6", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY7", "BTN_TRIGGER_HAPPY7", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY8", "BTN_TRIGGER_HAPPY8", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY9", "BTN_TRIGGER_HAPPY9", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY10", "BTN_TRIGGER_HAPPY10", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY11", "BTN_TRIGGER_HAPPY11", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY12", "BTN_TRIGGER_HAPPY12", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY13", "BTN_TRIGGER_HAPPY13", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY14", "BTN_TRIGGER_HAPPY14", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY15", "BTN_TRIGGER_HAPPY15", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY16", "BTN_TRIGGER_HAPPY16", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY17", "BTN_TRIGGER_HAPPY17", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY18", "BTN_TRIGGER_HAPPY18", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY19", "BTN_TRIGGER_HAPPY19", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY20", "BTN_TRIGGER_HAPPY20", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY21", "BTN_TRIGGER_HAPPY21", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY22", "BTN_TRIGGER_HAPPY22", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY23", "BTN_TRIGGER_HAPPY23", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY24", "BTN_TRIGGER_HAPPY24", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY25", "BTN_TRIGGER_HAPPY25", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY26", "BTN_TRIGGER_HAPPY26", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY27", "BTN_TRIGGER_HAPPY27", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY28", "BTN_TRIGGER_HAPPY28", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY29", "BTN_TRIGGER_HAPPY29", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY30", "BTN_TRIGGER_HAPPY30", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY31", "BTN_TRIGGER_HAPPY31", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY32", "BTN_TRIGGER_HAPPY32", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY33", "BTN_TRIGGER_HAPPY33", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY34", "BTN_TRIGGER_HAPPY34", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY35", "BTN_TRIGGER_HAPPY35", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY36", "BTN_TRIGGER_HAPPY36", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY37", "BTN_TRIGGER_HAPPY37", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY38", "BTN_TRIGGER_HAPPY38", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY39", "BTN_TRIGGER_HAPPY39", "usb_gp_bbtn"),
+    ("BTN_TRIGGER_HAPPY40", "BTN_TRIGGER_HAPPY40", "usb_gp_bbtn"),]
 
 # code, display name, type
-xbox1_code_list = [("XB1_A", "A Button", "usb_gp_btn"),
-    ("XB1_B", "B Button", "usb_gp_btn"),
-    ("XB1_X", "X Button", "usb_gp_btn"),
-    ("XB1_Y", "Y Button", "usb_gp_btn"),
-    ("XB1_LSB", "L-Stick Button", "usb_gp_btn"),
-    ("XB1_RSB", "R-Stick Button", "usb_gp_btn"),
-    ("XB1_LB", "LB Button", "usb_gp_btn"),
-    ("XB1_RB", "RB Button", "usb_gp_btn"),
-    ("XB1_VIEW", "View Button", "usb_gp_btn"),
-    ("XB1_MENU", "Menu Button", "usb_gp_btn"),
-    ("XB1_LOGO", "Xbox Button", "usb_gp_btn"),
-    ("XB1_LSX", "L-Stick X", "usb_abs_axis"),
-    ("XB1_LSY", "L-Stick Y", "usb_abs_axis"),
-    ("XB1_RSX", "R-Stick X", "usb_abs_axis"),
-    ("XB1_RSY", "R-Stick Y", "usb_abs_axis"),
-    ("XB1_LT", "L-Trigger", "usb_abs_axis"),
-    ("XB1_RT", "R-Trigger", "usb_abs_axis"),
-    ("XB1_DPX", "D-pad X", "usb_abs_axis"),
-    ("XB1_DPY", "D-pad Y", "usb_abs_axis")]
+xbox_code_list = [("XB_A", "XB A Button", "usb_gp_btn"),
+    ("XB_B", "XB B Button", "usb_gp_btn"),
+    ("XB_X", "XB X Button", "usb_gp_btn"),
+    ("XB_Y", "XB Y Button", "usb_gp_btn"),
+    ("XB_LB", "XB LB Button", "usb_gp_btn"),
+    ("XB_RB", "XB RB Button", "usb_gp_btn"),
+    ("XB_LSB", "XB L-Stick Button", "usb_gp_btn"),
+    ("XB_RSB", "XB R-Stick Button", "usb_gp_btn"),
+    ("XB_VIEW", "XB View Button", "usb_gp_btn"),
+    ("XB_MENU", "XB Menu Button", "usb_gp_btn"),
+    ("XB_SHARE", "XB Share Button", "usb_gp_btn"),
+    ("XB_LOGO", "XB Xbox Button", "usb_gp_btn"),
+    ("XB_LSX", "XB L-Stick X", "usb_abs_axis"),
+    ("XB_LSY", "XB L-Stick Y", "usb_abs_axis"),
+    ("XB_RSX", "XB R-Stick X", "usb_abs_axis"),
+    ("XB_RSY", "XB R-Stick Y", "usb_abs_axis"),
+    ("XB_LT", "XB LT Analog Trigger", "usb_abs_axis"),
+    ("XB_RT", "XB RT Analog Trigger", "usb_abs_axis"),
+    ("XB_DPX", "XB D-pad X", "usb_abs_axis"),
+    ("XB_DPY", "XB D-pad Y", "usb_abs_axis")]
 
-ps5_code_list = [("PS5_CROSS","Cross Button","usb_gp_btn"),
-    ("PS5_CIRCLE","Circle Button","usb_gp_btn"),
-    ("PS5_SQUARE","Square Button","usb_gp_btn"),
-    ("PS5_TRIANGLE","Triangle Button","usb_gp_btn"),
-    ("PS5_L1","L1 Button","usb_gp_btn"),
-    ("PS5_R1","R1 Button","usb_gp_btn"),
-    ("PS5_L2_BUTTON","L2 Button","usb_gp_btn"),
-    ("PS5_R2_BUTTON","R2 Button","usb_gp_btn"),
-    ("PS5_CREATE","Create Button","usb_gp_btn"),
-    ("PS5_OPTION","Option Button","usb_gp_btn"),
-    ("PS5_LOGO","PS Logo Button","usb_gp_btn"),
-    ("PS5_MUTE","Mute Button","usb_gp_btn"),
-    ("PS5_TOUCHPAD_BUTTON","Touchpad Button","usb_gp_btn"),
-    ("PS5_LSB","PS L-Stick Button","usb_gp_btn"),
-    ("PS5_RSB","PS R-Stick Button","usb_gp_btn"),
-    ("PS5_LSX","PS L-Stick X","usb_abs_axis"),
-    ("PS5_LSY","PS L-Stick Y","usb_abs_axis"),
-    ("PS5_RSX","PS R-Stick X","usb_abs_axis"),
-    ("PS5_RSY","PS R-Stick Y","usb_abs_axis"),
-    ("PS5_L2_ANALOG","L2 Analog","usb_abs_axis"),
-    ("PS5_R2_ANALOG","R2 Analog","usb_abs_axis"),
-    ("PS5_DPX","PS D-pad X","usb_abs_axis"),
-    ("PS5_DPY","PS D-pad Y","usb_abs_axis")]
+ps_code_list = [("PS_CROSS","PS Cross Button","usb_gp_btn"),
+    ("PS_CIRCLE","PS Circle Button","usb_gp_btn"),
+    ("PS_SQUARE","PS Square Button","usb_gp_btn"),
+    ("PS_TRIANGLE","PS Triangle Button","usb_gp_btn"),
+    ("PS_L1","PS L1 Button","usb_gp_btn"),
+    ("PS_R1","PS R1 Button","usb_gp_btn"),
+    ("PS_L2_BUTTON","PS L2 Button","usb_gp_btn"),
+    ("PS_R2_BUTTON","PS R2 Button","usb_gp_btn"),
+    ("PS_CREATE","PS Create Button","usb_gp_btn"),
+    ("PS_OPTION","PS Option Button","usb_gp_btn"),
+    ("PS_LOGO","PS Playstation Button","usb_gp_btn"),
+    ("PS_MUTE","PS Mute Button","usb_gp_btn"),
+    ("PS_TOUCHPAD_BUTTON","PS Touchpad Button","usb_gp_btn"),
+    ("PS_LSB","PS L-Stick Button","usb_gp_btn"),
+    ("PS_RSB","PS R-Stick Button","usb_gp_btn"),
+    ("PS_LSX","PS L-Stick X","usb_abs_axis"),
+    ("PS_LSY","PS L-Stick Y","usb_abs_axis"),
+    ("PS_RSX","PS R-Stick X","usb_abs_axis"),
+    ("PS_RSY","PS R-Stick Y","usb_abs_axis"),
+    ("PS_L2_ANALOG","PS L2 Analog Trigger","usb_abs_axis"),
+    ("PS_R2_ANALOG","PS R2 Analog Trigger","usb_abs_axis"),
+    ("PS_DPX","PS D-pad X","usb_abs_axis"),
+    ("PS_DPY","PS D-pad Y","usb_abs_axis")]
 
 # code, display name, type
 kb_code_list = [("KEY_1", "KEY_1", "kb_key"), ("KEY_2", "KEY_2", "kb_key"), ("KEY_3", "KEY_3", "kb_key"), ("KEY_4", "KEY_4", "kb_key"), ("KEY_5", "KEY_5", "kb_key"), ("KEY_6", "KEY_6", "kb_key"), ("KEY_7", "KEY_7", "kb_key"), ("KEY_8", "KEY_8", "kb_key"), ("KEY_9", "KEY_9", "kb_key"), ("KEY_0", "KEY_0", "kb_key"), ("KEY_A", "KEY_A", "kb_key"), ("KEY_B", "KEY_B", "kb_key"), ("KEY_C", "KEY_C", "kb_key"), ("KEY_D", "KEY_D", "kb_key"), ("KEY_E", "KEY_E", "kb_key"), ("KEY_F", "KEY_F", "kb_key"), ("KEY_G", "KEY_G", "kb_key"), ("KEY_H", "KEY_H", "kb_key"), ("KEY_I", "KEY_I", "kb_key"), ("KEY_J", "KEY_J", "kb_key"), ("KEY_K", "KEY_K", "kb_key"), ("KEY_L", "KEY_L", "kb_key"), ("KEY_M", "KEY_M", "kb_key"), ("KEY_N", "KEY_N", "kb_key"), ("KEY_O", "KEY_O", "kb_key"), ("KEY_P", "KEY_P", "kb_key"), ("KEY_Q", "KEY_Q", "kb_key"), ("KEY_R", "KEY_R", "kb_key"), ("KEY_S", "KEY_S", "kb_key"), ("KEY_T", "KEY_T", "kb_key"), ("KEY_U", "KEY_U", "kb_key"), ("KEY_V", "KEY_V", "kb_key"), ("KEY_W", "KEY_W", "kb_key"), ("KEY_X", "KEY_X", "kb_key"), ("KEY_Y", "KEY_Y", "kb_key"), ("KEY_Z", "KEY_Z", "kb_key"), ("KEY_SPACE", "KEY_SPACE", "kb_key"), ("KEY_UP", "KEY_UP", "kb_key"), ("KEY_DOWN", "KEY_DOWN", "kb_key"), ("KEY_LEFT", "KEY_LEFT", "kb_key"), ("KEY_RIGHT", "KEY_RIGHT", "kb_key"), ("KEY_ESC", "KEY_ESC", "kb_key"), ("KEY_TAB", "KEY_TAB", "kb_key"), ("KEY_ENTER", "KEY_ENTER", "kb_key"), ("KEY_END", "KEY_END", "kb_key"), ("KEY_HOME", "KEY_HOME", "kb_key"), ("KEY_LEFTALT", "KEY_LEFTALT", "kb_key"), ("KEY_LEFTCTRL", "KEY_LEFTCTRL", "kb_key"), ("KEY_LEFTSHIFT", "KEY_LEFTSHIFT", "kb_key"), ("KEY_RIGHTALT", "KEY_RIGHTALT", "kb_key"), ("KEY_RIGHTCTRL", "KEY_RIGHTCTRL", "kb_key"), ("KEY_RIGHTSHIFT", "KEY_RIGHTSHIFT", "kb_key"), ("KEY_SCROLLLOCK", "KEY_SCROLLLOCK", "kb_key"), ("KEY_SYSRQ", "KEY_SYSRQ", "kb_key"), ("KEY_PAGEUP", "KEY_PAGEUP", "kb_key"), ("KEY_PAGEDOWN", "KEY_PAGEDOWN", "kb_key"), ("KEY_INSERT", "KEY_INSERT", "kb_key"), ("KEY_DELETE", "KEY_DELETE", "kb_key"), ("KEY_102ND", "KEY_102ND", "kb_key"), ("KEY_CAPSLOCK", "KEY_CAPSLOCK", "kb_key"), ("KEY_NUMLOCK", "KEY_NUMLOCK", "kb_key"), ("KEY_MINUS", "KEY_MINUS", "kb_key"), ("KEY_EQUAL", "KEY_EQUAL", "kb_key"), ("KEY_BACKSPACE", "KEY_BACKSPACE", "kb_key"), ("KEY_LEFTBRACE", "KEY_LEFTBRACE", "kb_key"), ("KEY_RIGHTBRACE", "KEY_RIGHTBRACE", "kb_key"), ("KEY_SEMICOLON", "KEY_SEMICOLON", "kb_key"), ("KEY_APOSTROPHE", "KEY_APOSTROPHE", "kb_key"), ("KEY_GRAVE", "KEY_GRAVE", "kb_key"), ("KEY_BACKSLASH", "KEY_BACKSLASH", "kb_key"), ("KEY_COMMA", "KEY_COMMA", "kb_key"), ("KEY_DOT", "KEY_DOT", "kb_key"), ("KEY_SLASH", "KEY_SLASH", "kb_key"), ("KEY_F1", "KEY_F1", "kb_key"), ("KEY_F2", "KEY_F2", "kb_key"), ("KEY_F3", "KEY_F3", "kb_key"), ("KEY_F4", "KEY_F4", "kb_key"), ("KEY_F5", "KEY_F5", "kb_key"), ("KEY_F6", "KEY_F6", "kb_key"), ("KEY_F7", "KEY_F7", "kb_key"), ("KEY_F8", "KEY_F8", "kb_key"), ("KEY_F9", "KEY_F9", "kb_key"), ("KEY_F10", "KEY_F10", "kb_key"), ("KEY_F11", "KEY_F11", "kb_key"), ("KEY_F12", "KEY_F12", "kb_key"), ("KEY_F13", "KEY_F13", "kb_key"), ("KEY_F14", "KEY_F14", "kb_key"), ("KEY_F15", "KEY_F15", "kb_key"), ("KEY_F16", "KEY_F16", "kb_key"), ("KEY_F17", "KEY_F17", "kb_key"), ("KEY_F18", "KEY_F18", "kb_key"), ("KEY_F19", "KEY_F19", "kb_key"), ("KEY_F20", "KEY_F20", "kb_key"), ("KEY_F21", "KEY_F21", "kb_key"), ("KEY_F22", "KEY_F22", "kb_key"), ("KEY_F23", "KEY_F23", "kb_key"), ("KEY_F24", "KEY_F24", "kb_key"), ("KEY_KP0", "KEY_KP0", "kb_key"), ("KEY_KP1", "KEY_KP1", "kb_key"), ("KEY_KP2", "KEY_KP2", "kb_key"), ("KEY_KP3", "KEY_KP3", "kb_key"), ("KEY_KP4", "KEY_KP4", "kb_key"), ("KEY_KP5", "KEY_KP5", "kb_key"), ("KEY_KP6", "KEY_KP6", "kb_key"), ("KEY_KP7", "KEY_KP7", "kb_key"), ("KEY_KP8", "KEY_KP8", "kb_key"), ("KEY_KP9", "KEY_KP9", "kb_key"), ("KEY_KPASTERISK", "KEY_KPASTERISK", "kb_key"), ("KEY_KPDOT", "KEY_KPDOT", "kb_key"), ("KEY_KPENTER", "KEY_KPENTER", "kb_key"), ("KEY_KPMINUS", "KEY_KPMINUS", "kb_key"), ("KEY_KPPLUS", "KEY_KPPLUS", "kb_key"), ("KEY_KPSLASH", "KEY_KPSLASH", "kb_key")]
@@ -324,11 +394,26 @@ ibm_15pin_gamepad_code_list = [('IBM_GGP_BTN_1', '15P Button 1', 'ibm_ggp_btn'),
     ('IBM_GGP_JS2_YP', '15P JS2 Positive Y', 'ibm_ggp_half_axis'),
     ('IBM_GGP_JS2_YN', '15P JS2 Negative Y', 'ibm_ggp_half_axis')]
 
-all_codes_list = generic_usb_gamepad_code_list + xbox1_code_list + ps5_code_list + kb_code_list + mouse_code_list + ibm_15pin_gamepad_code_list
+all_codes_list = generic_usb_gamepad_code_list + xbox_code_list + ps_code_list + kb_code_list + mouse_code_list + ibm_15pin_gamepad_code_list
 
-def tuple_list_search_by_displayname(tup_list, query):
+def get_gamepad_type():
+    profile_selection = profile_lstbox.curselection()
+    if len(profile_selection) <= 0:
+        return None
+    return gamepad_mapping_dict_list[profile_selection[0]].get('usb_gamepad_type', "Xbox")
+
+def get_lookup_prefix():
+    this_gamepad_type = get_gamepad_type()
+    display_name_prefix = ''
+    if 'Xbox'.lower() in this_gamepad_type.lower():
+        display_name_prefix = 'XB '
+    elif 'PlayStation'.lower() in this_gamepad_type.lower():
+        display_name_prefix = 'PS '
+    return display_name_prefix
+
+def tuple_list_search_by_displayname(tup_list, query, prefix=''):
     for item in tup_list:
-        if query == item[1]:
+        if prefix + str(query) == item[1]:
             return item
     return None, None, None
 
@@ -342,7 +427,7 @@ def create_mapping_window(existing_rule=None):
     def validate_dropdown_menus(event):
         map_from_selected_option = map_from_option_var.get()
         map_category_selected_option = map_to_category_option_var.get()
-        this_code, this_display_name, this_type = tuple_list_search_by_displayname(xbox1_code_list + ps5_code_list + generic_usb_gamepad_code_list, map_from_selected_option)
+        this_code, this_display_name, this_type = tuple_list_search_by_displayname(xbox_code_list + ps_code_list + generic_usb_gamepad_code_list, map_from_selected_option, get_lookup_prefix())
         if this_code is None:
             return
         secondary_map_to_code_dropdown.set('')
@@ -400,13 +485,14 @@ def create_mapping_window(existing_rule=None):
     map_to_label = Label(master=rule_window, text="Map To:")
     map_to_label.place(x=10, y=50)
 
+    # test
     current_gamepad_code_list = generic_usb_gamepad_code_list
-    if 'xbox' in usb_gamepad_type.lower():
-        current_gamepad_code_list = xbox1_code_list
-    if 'PlayStation'.lower() in usb_gamepad_type.lower():
-        current_gamepad_code_list = ps5_code_list
-
-    current_gamepad_code_list = [x[1] for x in current_gamepad_code_list]
+    if 'xbox'.lower() in usb_gamepad_type.lower():
+        current_gamepad_code_list = [str(x[1]).partition('XB ')[2] for x in xbox_code_list]
+    elif 'PlayStation'.lower() in usb_gamepad_type.lower():
+        current_gamepad_code_list = [str(x[1]).partition('PS ')[2] for x in ps_code_list]
+    else:
+        current_gamepad_code_list = [str(x[1]) for x in current_gamepad_code_list]
 
     map_from_option_var = StringVar()
     map_from_option_var.set(current_gamepad_code_list[0])
@@ -436,9 +522,13 @@ def create_mapping_window(existing_rule=None):
         selection = profile_lstbox.curselection()
         if len(selection) <= 0:
             return
-        map_from_code, map_from_display_name, map_from_type = tuple_list_search_by_displayname(all_codes_list, map_from_option_var.get())
+        map_from_code, map_from_display_name, map_from_type = tuple_list_search_by_displayname(all_codes_list, map_from_option_var.get(), get_lookup_prefix())
         map_to_code1, map_to_display_name1, map_to_type1 = tuple_list_search_by_displayname(all_codes_list, map_to_code_dropdown.get())
         map_to_code2, map_to_display_name2, map_to_type2 = tuple_list_search_by_displayname(all_codes_list, secondary_map_to_code_dropdown.get())
+        
+        print(map_from_option_var.get(), map_from_code, map_from_display_name, map_from_type)
+        print(map_to_code_dropdown.get(), map_to_code1, map_to_display_name1, map_to_type1)
+
         if map_from_code is None:
             return
         this_map_dict = {'code':map_to_code1}
@@ -659,16 +749,16 @@ pboard_dropdown = OptionMenu(options_lf, pboard_option_var, command=pboard_dropd
 pboard_dropdown.place(x=10, y=30, width=150)
 pboard_dropdown.config(state=DISABLED)
 
-usb_gamepad_type_dropdown_label = Label(master=options_lf, text="USB Gamepad:")
+usb_gamepad_type_dropdown_label = Label(master=options_lf, text="Gamepad Type:")
 usb_gamepad_type_dropdown_label.place(x=10, y=80)
-usb_gamepad_list = ['Generic USB', 'Xbox', 'PlayStation']
+usb_gamepad_list = ['Xbox', 'PlayStation', 'Generic USB']
 usb_gamepad_option_var = StringVar()
 usb_gamepad_option_var.set(usb_gamepad_list[1])
 usb_gamepad_dropdown = OptionMenu(options_lf, usb_gamepad_option_var, command=usb_gamepad_dropdown_change, *usb_gamepad_list)
 usb_gamepad_dropdown.place(x=10, y=100, width=150)
 usb_gamepad_dropdown.config(state=DISABLED)
 
-# select_root_folder('C:/Users/allen/Desktop/flashdrive_test')
+select_root_folder('C:/Users/allen/Desktop/flashdrive_test')
 
 root.update()
 root.mainloop()
