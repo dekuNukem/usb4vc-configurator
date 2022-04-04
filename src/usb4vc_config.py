@@ -14,9 +14,9 @@ import json
 import shutil
 import copy
 
-THIS_VERSION_NUMBER = '0.0.4'
+THIS_VERSION_NUMBER = '0.1.0'
 MAIN_WINDOW_WIDTH = 800
-MAIN_WINDOW_HEIGHT = 680
+MAIN_WINDOW_HEIGHT = 610
 PADDING = 10
 HEIGHT_CONNECT_LF = 60
 
@@ -51,6 +51,9 @@ root.resizable(width=FALSE, height=FALSE)
 
 connection_lf = LabelFrame(root, text="Dashboard", width=MAIN_WINDOW_WIDTH - PADDING*2, height=HEIGHT_CONNECT_LF)
 connection_lf.place(x=PADDING, y=0)
+
+save_lf = LabelFrame(root, text="Save & Updates", width=MAIN_WINDOW_WIDTH - PADDING*2, height=60)
+save_lf.place(x=PADDING, y=540)
 
 def open_user_manual_url():
     webbrowser.open('https://github.com/dekuNukem/usb4vc-configurator/blob/master/README.md')
@@ -101,11 +104,8 @@ flash_drive_config_path = ''
 def app_update_click(event):
     webbrowser.open('https://github.com/dekuNukem/usb4vc-configurator/releases/latest')
 
-updates_lf = LabelFrame(root, text="Updates", width=MAIN_WINDOW_WIDTH - PADDING*2, height=60)
-updates_lf.place(x=PADDING, y=70)
-
-pc_app_update_label = Label(master=updates_lf)
-pc_app_update_label.place(x=400, y=10)
+pc_app_update_label = Label(master=save_lf)
+pc_app_update_label.place(x=450, y=10)
 
 update_stats = check_update.get_pc_app_update_status(THIS_VERSION_NUMBER)
 
@@ -147,11 +147,8 @@ def update_copy_button_click():
         messagebox.showerror("Error", "File Copy Failed: \n\n"+str(e))
     messagebox.showinfo("Update", "Success!")
 
-copy_button = Button(updates_lf, text="Copy Latest USB4VC Updates to Flash Drive", command=update_copy_button_click, state=DISABLED)
-copy_button.place(x=10, y=5, width=300)
-
 gamepad_config_lf = LabelFrame(root, text="Custom Gamepad Mappings", width=MAIN_WINDOW_WIDTH - PADDING*2, height=470)
-gamepad_config_lf.place(x=PADDING, y=140)
+gamepad_config_lf.place(x=PADDING, y=70)
 
 profiles_lf = LabelFrame(gamepad_config_lf, text="Profiles", width=180, height=435)
 profiles_lf.place(x=10, y=5)
@@ -161,9 +158,6 @@ options_lf.place(x=200, y=5)
 
 mappings_lf = LabelFrame(gamepad_config_lf, text="Mappings", width=375, height=435)
 mappings_lf.place(x=390, y=5)
-
-save_lf = LabelFrame(root, text="Save", width=MAIN_WINDOW_WIDTH - PADDING*2, height=60)
-save_lf.place(x=PADDING, y=615)
 
 gamepad_mapping_dict_list = []
 profile_var = StringVar()
@@ -681,38 +675,7 @@ mapping_remove_button = Button(mappings_lf, text="Remove", command=mapping_remov
 mapping_remove_button.place(x=20, y=380, width=330, height=BUTTON_HEIGHT)
 
 mapping_save_button = Button(save_lf, text="Save Settings to Flash Drive", command=save_mapping_to_file, state=DISABLED, fg='#B52E1F')
-mapping_save_button.place(x=250, y=5, width=500, height=BUTTON_HEIGHT)
-
-def wifi_click():
-    wifi_name = simpledialog.askstring(title="WiFi", prompt="WiFi Name?")
-    if wifi_name is None or len(wifi_name) == 0:
-        return
-    wifi_password = simpledialog.askstring(title="WiFi", prompt="WiFi Password? (Leave blank for none)")
-    if wifi_password is None:
-        return
-    wifi_country_code = simpledialog.askstring(title="WiFi", prompt="WiFi Country Code? (Search on Google if unsure)")
-    if wifi_country_code is None or len(wifi_country_code) == 0:
-        return
-    wifi_dict = {'wifi_name': wifi_name, 'wifi_password':wifi_password, 'wifi_country_code':wifi_country_code.upper()}
-    ensure_dir(flash_drive_config_path)
-
-    wifi_file_path = os.path.join(flash_drive_config_path, 'wifi_info.json')
-    try:
-        os.remove(wifi_file_path)
-    except Exception:
-        pass
-    time.sleep(0.05)
-
-    try:
-        with open(wifi_file_path, 'w', encoding='utf-8') as save_file:
-            save_file.write(json.dumps(wifi_dict, sort_keys=True))
-    except Exception as e:
-        messagebox.showerror("Error", "Saving WiFi info Failed!\n\n"+str(e))
-        return
-    messagebox.showinfo("Save", "Success!")
-
-wifi_button = Button(save_lf, text="Add WiFi Password", command=wifi_click, state=DISABLED)
-wifi_button.place(x=10, y=5, width=200, height=BUTTON_HEIGHT)
+mapping_save_button.place(x=10, y=5, width=400, height=BUTTON_HEIGHT)
 
 def enable_profile_buttons():
     copy_button.config(state=NORMAL)
