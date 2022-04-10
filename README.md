@@ -52,11 +52,37 @@ Click `New` to create a new profile, enter a name, and select the desired protoc
 
 ![Alt text](resources/profile.png)
 
+### (OPTIONAL) Find out event codes
+
+[Skip this step](#create-a-new-mapping) if you're using a supported controller (i.e. XBox and Playstation).
+
+If you're using an **UNSUPPORTED** gamepad, you might want to find out what each button does first.
+
+Select `Show Event Codes` on main menu:
+
+![Alt text](resources/showev.jpeg)
+
+Press a button on the controller, it will show:
+
+* Device Name
+
+* USB Vendor and Product ID
+
+* Event code name
+
+![Alt text](resources/evexample.jpeg)
+
+Write down the **EVENT CODE NAME** for each button, you'll need them later.
+
+**Hold** `+` button while pushing a gamepad button to exit.
+
 ### Create a new mapping
 
 Click `New` in `Mappings` section to create a new mapping.
 
 Select the desired combination, and press `Save this Mapping`.
+
+If using unsupported controllers, select the event code name you found out in `Map From` drop-down.
 
 ![Alt text](resources/newmap.png)
 
