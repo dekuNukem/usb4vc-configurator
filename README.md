@@ -2,11 +2,13 @@
 
 [Get USB4VC](https://github.com/dekuNukem/USB4VC/blob/master/README.md) | [Official Discord](https://discord.gg/HAuuh3pAmB) | [Getting Started](https://github.com/dekuNukem/USB4VC/blob/master/getting_started.md)
 
-With USB4VC Configurator, you can **update USB4VC software** and **add custom gamepad mappings**. This guide shows you how.
+You can **define your own custom gamepad mappings** with USB4VC Configurator. This guide shows you how.
+
+This software is fairly new and experimental right now, so do let me know if you run into any issues!
 
 ## Prepare USB Flashdrive
 
-USB4VC Configurator will save all the updates and configuration files into a USB flash drive, so you'll need one of those.
+USB4VC Configurator will save all the configuration files into a USB flash drive, so you'll need one of those.
 
 Make sure it is formatted in FAT32:
 
@@ -30,10 +32,6 @@ For Windows 10, click `More info` and then `Run anyway`.
 
 ![Alt text](resources/defender.png)
 
-For macOS, **`RIGHT CLICK`** on the app and select `Open`. You might have to do it twice.
-
-![Alt text](resources/macos_warning.png)
-
 ## Using the App
 
 ### Select flash drive
@@ -43,14 +41,6 @@ Press the `Open...` button and select **the entire flash drive**:
 ![Alt text](resources/launch.png)
 
 ![Alt text](resources/select.png)
-
-### Copy updates
-
-If you want to update USB4VC to latest software, press `Copy Latest USB4VC Updates to Flash Drive` button.
-
-If there are updates for the configurator itself, it will let you know too.
-
-![Alt text](resources/updates.png)
 
 ### Make a profile
 
@@ -100,17 +90,9 @@ After creating your mappings, press `Write Current Mappings to Flash Drive` butt
 
 Eject the flash drive, and plug it in the USB4VC.
 
-## Apply Updates on USB4VC
+## Load Mappings on USB4VC
 
-Select "Update via USB Flashdrive" in the main menu. It will:
-
-* Copy over latest software updates
-
-* Back up settings and debug logs to flash drive
-
-* Update Protocol Card firmware if needed
-
-* Relaunch the application
+Select "Load Custom Config from USB" in the main menu. It will copy over the mappings.
 
 ![Alt text](resources/rpiupdate.jpeg)
 
@@ -119,6 +101,10 @@ The new profiles should appear in the `Gamepad Protocol` setting, use `enter` bu
 ![Alt text](resources/descent.jpeg)
 
 That's pretty much it! Hopefully it works!
+
+## Problems?
+
+This software is fairly new and experimental right now, and there is no way for me to test every single combination of custom mappings. But of course, do let me know if you run into any issues!
 
 ## Questions or Comments?
 

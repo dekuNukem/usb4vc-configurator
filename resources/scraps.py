@@ -1,3 +1,40 @@
+"""
+For macOS, **`RIGHT CLICK`** on the app and select `Open`. You might have to do it twice.
+
+![Alt text](resources/macos_warning.png)
+"""
+
+
+def update_copy_button_click():
+    rcode, src_base_path = check_update.get_usb4vc_update(temp_path)
+    if rcode != 0:
+        messagebox.showerror("Error", "Error Fetching Update: \n\n"+str(msg))
+        return
+    if len(root_folder_path) < 2:
+        return
+    try:
+        dest_base_path = os.path.join(root_folder_path, 'usb4vc')
+        dest_firmware_path = os.path.join(dest_base_path, 'firmware')
+        dest_rpi_app_path = os.path.join(dest_base_path, 'rpi_app')
+        ensure_dir(dest_base_path)
+        time.sleep(0.1)
+        shutil.rmtree(dest_rpi_app_path)
+        time.sleep(0.1)
+        shutil.rmtree(dest_firmware_path)
+        time.sleep(0.1)
+    except Exception as e:
+        pass
+    try:
+        src_firmware_path = os.path.join(src_base_path, 'firmware')
+        src_rpi_app_path = os.path.join(src_base_path, 'rpi_app')
+        shutil.copytree(src_rpi_app_path, dest_rpi_app_path)
+        shutil.copytree(src_firmware_path, dest_firmware_path)
+    except Exception as e:
+        messagebox.showerror("Error", "File Copy Failed: \n\n"+str(e))
+    messagebox.showinfo("Update", "Success!")
+
+
+
     if usb_gamepad_type == "Xbox One Bluetooth":
         for key in mapping_dict:
             lookup_result = xbox_one_bluetooth_to_linux_ev_code_dict.get(key)

@@ -119,34 +119,6 @@ else:
     pc_app_update_label.config(text=f'This app ({THIS_VERSION_NUMBER}): Unknown', fg='black', bg=default_button_color)
     pc_app_update_label.unbind("<Button-1>")
 
-def update_copy_button_click():
-    rcode, src_base_path = check_update.get_usb4vc_update(temp_path)
-    if rcode != 0:
-        messagebox.showerror("Error", "Error Fetching Update: \n\n"+str(msg))
-        return
-    if len(root_folder_path) < 2:
-        return
-    try:
-        dest_base_path = os.path.join(root_folder_path, 'usb4vc')
-        dest_firmware_path = os.path.join(dest_base_path, 'firmware')
-        dest_rpi_app_path = os.path.join(dest_base_path, 'rpi_app')
-        ensure_dir(dest_base_path)
-        time.sleep(0.1)
-        shutil.rmtree(dest_rpi_app_path)
-        time.sleep(0.1)
-        shutil.rmtree(dest_firmware_path)
-        time.sleep(0.1)
-    except Exception as e:
-        pass
-    try:
-        src_firmware_path = os.path.join(src_base_path, 'firmware')
-        src_rpi_app_path = os.path.join(src_base_path, 'rpi_app')
-        shutil.copytree(src_rpi_app_path, dest_rpi_app_path)
-        shutil.copytree(src_firmware_path, dest_firmware_path)
-    except Exception as e:
-        messagebox.showerror("Error", "File Copy Failed: \n\n"+str(e))
-    messagebox.showinfo("Update", "Success!")
-
 gamepad_config_lf = LabelFrame(root, text="Custom Gamepad Mappings", width=MAIN_WINDOW_WIDTH - PADDING*2, height=470)
 gamepad_config_lf.place(x=PADDING, y=70)
 
@@ -183,12 +155,10 @@ def update_profile_display():
             this_str = ''
             usb_gamepad_source_code, usb_gamepad_source_display_name, usb_gamepad_source_type = tuple_list_search_by_codename(all_codes_list, item)
             map_dict = gamepad_mapping_dict_list[index]['mapping'][item]
-            gap1 = 15 - len(usb_gamepad_source_display_name)
-            this_str += usb_gamepad_source_display_name + ' '*gap1
+            this_str += usb_gamepad_source_display_name + ' -> '
             for value in list(map_dict.values()):
                 this_code, this_display_name, this_type = tuple_list_search_by_codename(all_codes_list, value)
-                this_gap = 15 - len(this_display_name)
-                this_str += this_display_name + ' '*this_gap
+                this_str += this_display_name + ' '
             this_str += '\n'
             mapping_str_list.append(this_str)
         mappings_var.set(mapping_str_list)
@@ -482,7 +452,6 @@ def create_mapping_window(existing_rule=None):
     map_to_label = Label(master=rule_window, text="Map To:")
     map_to_label.place(x=10, y=50)
 
-    # test
     current_gamepad_code_list = generic_usb_gamepad_code_list
     if 'xbox'.lower() in usb_gamepad_type.lower():
         current_gamepad_code_list = [str(x[1]).partition('XB ')[2] for x in xbox_code_list]
@@ -678,13 +647,11 @@ mapping_save_button = Button(save_lf, text="Save Settings to Flash Drive", comma
 mapping_save_button.place(x=10, y=5, width=400, height=BUTTON_HEIGHT)
 
 def enable_profile_buttons():
-    copy_button.config(state=NORMAL)
     profile_add_button.config(state=NORMAL)
     profile_remove_button.config(state=NORMAL)
     profile_rename_button.config(state=NORMAL)
     profile_dupe_button.config(state=NORMAL)
     mapping_save_button.config(state=NORMAL)
-    wifi_button.config(state=NORMAL)
 
 def select_root_folder(root_path=None):
     global root_folder_path
@@ -701,6 +668,7 @@ def select_root_folder(root_path=None):
     load_gamepad_mapping(flash_drive_config_path)
     update_profile_display()
     enable_profile_buttons()
+    mappings_var.set([])
 
 open_button = Button(connection_lf, text="Open...", command=select_root_folder)
 open_button.place(x=10, y=5, width=80)
