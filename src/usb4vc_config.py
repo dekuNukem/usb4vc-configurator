@@ -14,7 +14,13 @@ import json
 import shutil
 import copy
 
-THIS_VERSION_NUMBER = '0.1.0'
+"""
+0.2.0
+20230424
+added support for lisa card
+"""
+
+THIS_VERSION_NUMBER = '0.2.0'
 MAIN_WINDOW_WIDTH = 800
 MAIN_WINDOW_HEIGHT = 610
 PADDING = 10
