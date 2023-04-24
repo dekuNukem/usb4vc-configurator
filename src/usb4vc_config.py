@@ -708,7 +708,7 @@ def usb_gamepad_dropdown_change(event):
 
 protocol_board_dropdown_label = Label(master=options_lf, text="Protocol Card:")
 protocol_board_dropdown_label.place(x=10, y=5)
-protocol_board_list = ['Unknown', 'IBMPC', "ADB"]
+protocol_board_list = ['Unknown', 'IBMPC', 'ADB', 'Lisa/Mac/ADB']
 pboard_option_var = StringVar()
 pboard_option_var.set(protocol_board_list[0])
 pboard_dropdown = OptionMenu(options_lf, pboard_option_var, command=pboard_dropdown_change, *protocol_board_list)
